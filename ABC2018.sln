@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalksWeb", "TechTalksWeb\TechTalksWeb.csproj", "{B66D2B02-8D82-4F47-B2FA-7D133F397910}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TechTalksAPI", "TechTalksAPI\TechTalksAPI.csproj", "{83899468-EA27-4487-B516-03CD6ED17770}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,17 @@ Global
 		{B66D2B02-8D82-4F47-B2FA-7D133F397910}.Release|x64.Build.0 = Release|x64
 		{B66D2B02-8D82-4F47-B2FA-7D133F397910}.Release|x86.ActiveCfg = Release|x86
 		{B66D2B02-8D82-4F47-B2FA-7D133F397910}.Release|x86.Build.0 = Release|x86
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|x64.ActiveCfg = Debug|x64
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|x64.Build.0 = Debug|x64
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|x86.ActiveCfg = Debug|x86
+		{83899468-EA27-4487-B516-03CD6ED17770}.Debug|x86.Build.0 = Debug|x86
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|x64.ActiveCfg = Release|x64
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|x64.Build.0 = Release|x64
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|x86.ActiveCfg = Release|x86
+		{83899468-EA27-4487-B516-03CD6ED17770}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 EndGlobal

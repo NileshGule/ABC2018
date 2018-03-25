@@ -8,14 +8,26 @@
 dotnet new sln --name ABC2018
 ```
 
-### Add MVC Web app named `TechTalksWeb`
+### Create ASP.NET Core MVC Web project named `TechTalksWeb`
 
 ```bash
 dotnet new razor --output TechTalksWeb
 ```
 
-### Add MVC Web `TechTalksWeb` to `ABC2018` solution
+### Add `TechTalksWeb` web project to `ABC2018` solution
 
 ```bash
 dotnet sln add ./TechTalksWeb/TechTalksWeb.csproj
+```
+
+### Create ASP.NET Core Web API project named `TechTalksAPI`
+
+```bash
+dotnet new webapi --output TechTalksAPI
+```
+
+### Add `TechTalksAPI` api project to `ABC2018` solution
+
+```bash
+dotnet sln add ./TechTalksAPI/TechTalksAPI.csproj
 ```
