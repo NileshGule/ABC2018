@@ -3,7 +3,7 @@ kind: Service
 
 metadata:
   name: techtalksapi
-
+  namespace: abc2018sg
 spec:
   # type: NodePort
   type: LoadBalancer

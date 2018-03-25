@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
   name: techtalksapi
-  namespace: AzureBootCamp2018
+  namespace: abc2018sg
   labels:
     run: techtalksapi
 
@@ -24,14 +24,14 @@ spec:
           command:
             - "sh"
             - "-c"
-            - "/opt/mssql-tools/bin/sqlcmd -S mssql-deployment -U sa -P January2018 -d master -i initialize-database.sql"
+            - "/opt/mssql-tools/bin/sqlcmd -S db-deployment -U sa -P January2018 -d master -i initialize-database.sql"
       containers:
       - name: techtalksapi
         image: nileshgule/techtalksapi
         ports:
         - containerPort: 8080
           protocol: TCP
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst

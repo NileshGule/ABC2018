@@ -3,7 +3,7 @@ kind: Deployment
 
 metadata:
   name: techtalksweb
-  namespace: AzureBootCamp2018
+  namespace: abc2018sg
   labels:
     run: webfront
 
@@ -24,7 +24,7 @@ spec:
         ports:
         - containerPort: 80
           protocol: TCP
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst

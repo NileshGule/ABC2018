@@ -3,7 +3,7 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: db-deployment
-  namespace: AzureBootCamp2018
+  namespace: abc2018sg
 spec:
   replicas: 1
   template:
