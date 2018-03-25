@@ -1,33 +1,33 @@
 version: '3'
 
 services:
-  db:
+  sql.data:
     image: nileshgule/sqlclient
-    hostname: 'sql2017'
-    container_name: sql2017
+    # hostname: 'sql2017'
+    # container_name: sql2017
     build:
       context: ../TechTalksDB
       dockerfile: Dockerfile
     
-  web:
+  webmvc:
     image: nileshgule/techtalksweb
-    container_name: techtalksweb
+    # container_name: techtalksweb
     build:
       context: ../TechTalksWeb
       dockerfile: Dockerfile
     depends_on: 
-      - api
+      - techtalks.api
     ports:
       - "80:80"
       
-  api:
+  techtalks.api:
     image: nileshgule/techtalksapi
-    container_name: TechTalksAPI
+    # container_name: TechTalksAPI
     build:
       context: ../TechTalksAPI
       dockerfile: Dockerfile
     depends_on:
-      - db
+      - sql.data
     ports:
       - "8080:8080"
 
