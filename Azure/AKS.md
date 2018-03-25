@@ -159,6 +159,9 @@ az group delete \
 
 ```
 
+Run powershell script
+./deleteRG.ps1 -resourceGroupName ABC2018ResourceGroup
+
 OMS Workspace : abc2018sgws
 
 ### Store OMS Secret key and ID
