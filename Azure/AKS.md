@@ -159,8 +159,13 @@ az group delete \
 
 ```
 
-Run powershell script
+### Run powershell script to delete resource group
+
+```powershell
+
 ./deleteRG.ps1 -resourceGroupName ABC2018ResourceGroup
+
+```
 
 OMS Workspace : abc2018sgws
 
