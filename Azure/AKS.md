@@ -159,7 +159,9 @@ az group delete \
 
 ```
 
-### Run powershell script to provision AKS cluster
+Remove `--no-wait` parameter to wait for the call to complete
+
+### Run powershell script to provision AKS cluster with all default parameters
 
 ```powershell
 
