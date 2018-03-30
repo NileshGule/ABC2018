@@ -3,5 +3,5 @@ Param(
 )
 
 # Delete AKS cluster
-Write-Host "Deleting resource group $ABC2018ResourceGroup" -ForegroundColor Yellow
+Write-Host "Deleting resource group $resourceGroupName" -ForegroundColor Yellow
 az group delete --name=$resourceGroupName --yes
