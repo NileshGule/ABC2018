@@ -159,6 +159,14 @@ az group delete \
 
 ```
 
+### Run powershell script to provision AKS cluster
+
+```powershell
+
+./initializeAKS.ps1
+
+```
+
 ### Run powershell script to delete resource group
 
 ```powershell

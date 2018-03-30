@@ -2,7 +2,9 @@ Param(
     [parameter(Mandatory=$false)][string]$subscriptionName="Visual Studio Enterprise",
     [parameter(Mandatory=$false)][string]$resourceGroupName="ABC2018ResourceGroup",
     [parameter(Mandatory=$false)][string]$resourceGroupLocaltion="East US",
-    [parameter(Mandatory=$false)][string]$clusterName="ABC2018AKSCluster"
+    [parameter(Mandatory=$false)][string]$clusterName="ABC2018AKSCluster",
+    [parameter(Mandatory=$false)][int16]$workerNodeCount=2,
+    [parameter(Mandatory=$false)][string]$kubernetesVersion="1.8.1"
 )
 
 # Set Azure subscription name
@@ -21,8 +23,8 @@ Write-Host "Creating AKS cluster $clusterName with resource group $resourceGroup
 az aks create `
 --resource-group=$resourceGroupName `
 --name=$clusterName `
---node-count=2 `
---kubernetes-version=1.8.1 `
+--node-count=$workerNodeCount `
+--kubernetes-version=$kubernetesVersion `
 --output=jsonc
 
 # Get credentials for newly created cluster
@@ -31,4 +33,4 @@ az aks get-credentials `
 --resource-group=$resourceGroupName `
 --name=$clusterName
 
-Write-Host "Successfully created cluster $clusterName" -ForegroundColor Green
+Write-Host "Successfully created cluster $clusterName with kubernetes version $kubernetesVersion and $workerNodeCount node(s)" -ForegroundColor Green
