@@ -169,6 +169,14 @@ Remove `--no-wait` parameter to wait for the call to complete
 
 ```
 
+### Run powershell script to browse AKS cluster
+
+```powershell
+
+./browseAKS.ps1
+
+```
+
 ### Run powershell script to delete resource group
 
 ```powershell
