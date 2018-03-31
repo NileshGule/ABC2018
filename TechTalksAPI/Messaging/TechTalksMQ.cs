@@ -11,6 +11,7 @@ namespace TechTalksAPI.Messaging
         private const string routingKey = "hello";
         public void SendMessage()
         {
+            Console.WriteLine("Inside send message");
             // var factory = new ConnectionFactory() { HostName = "localhost" };
             var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 30672 };
         
