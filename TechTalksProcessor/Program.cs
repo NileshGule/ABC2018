@@ -30,8 +30,8 @@ namespace TechTalksProcessor
             string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
 
             var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"appsettings.{environment}.json", optional: false);
+                .SetBasePath(Directory.GetCurrentDirectory());
+                // .AddJsonFile($"appsettings.{environment}.json", optional: false);
 
             Configuration = builder.Build();
         }
