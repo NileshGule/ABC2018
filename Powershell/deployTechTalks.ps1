@@ -22,8 +22,11 @@ if($IsLocalCluster)
 }
 else 
 {
-    Write-Host "Provisioning AKS cluster with default parameters" -ForegroundColor Cyan
-    & ((Split-Path $MyInvocation.InvocationName) + "\initializeAKS.ps1") 
+    if($ProvisionAKSCluster)
+    {
+        Write-Host "Provisioning AKS cluster with default parameters" -ForegroundColor Cyan
+        & ((Split-Path $MyInvocation.InvocationName) + "\initializeAKS.ps1") 
+    }
 }
 
 Write-Host "Starting deployment of TechTalks application and services" -ForegroundColor Yellow
