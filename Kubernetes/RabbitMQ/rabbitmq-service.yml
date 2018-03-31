@@ -8,7 +8,8 @@ metadata:
     type: LoadBalancer  
     # type: NodePort      
 spec:
-  type: NodePort
+  # type: NodePort
+  type: LoadBalancer
   ports:
    - name: http
      protocol: TCP
