@@ -22,6 +22,9 @@ spec:
       containers:
       - name: rabbitmq-consumer
         image: nileshgule/techtalksprocessor
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
         imagePullPolicy: Always
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
