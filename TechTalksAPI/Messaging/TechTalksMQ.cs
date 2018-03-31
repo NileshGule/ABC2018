@@ -13,7 +13,9 @@ namespace TechTalksAPI.Messaging
         {
             Console.WriteLine("Inside send message");
             // var factory = new ConnectionFactory() { HostName = "localhost" };
-            var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 30672 };
+            // var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 31672 };
+            var factory = new ConnectionFactory() { HostName = "rabbitmq"};
+            
         
             using (var connection = factory.CreateConnection())
             {

@@ -5,8 +5,8 @@ metadata:
   name: rabbitmq
   labels:
     app: rabbitmq
-    # type: LoadBalancer  
-    type: NodePort      
+    type: LoadBalancer  
+    # type: NodePort      
 spec:
   type: NodePort
   ports:
