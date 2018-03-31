@@ -14,12 +14,8 @@ namespace TechTalksProcessor.Messaging
         public void ConsumeMessage()
         {
             Console.WriteLine("Inside send message");
-            // var factory = new ConnectionFactory() { HostName = "localhost" };
-            // var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 31672 };
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
 
-            Console.WriteLine("Inside connection factory");
-        
             using (var connection = factory.CreateConnection())
             {
                 Console.WriteLine("Inside connection");
@@ -35,20 +31,31 @@ namespace TechTalksProcessor.Messaging
                                     autoDelete: false,
                                     arguments: null);
 
+                    channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
                     
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
                     var consumer = new EventingBasicConsumer(channel);
+                    Console.WriteLine("Created consumer...");
+                    // consumer.Received += (model, ea) =>
+                    // {
+                    //     Console.WriteLine("Inside received...");
+                    //     var body = ea.Body;
+                    //     var message = Encoding.UTF8.GetString(body);
+                    //     Console.WriteLine(" [x] {0}", message);
+                    // };
 
-                    consumer.Received += (model, ea) =>
+                    BasicGetResult result = channel.BasicGet(queueName, true);
+                    if (result != null)
                     {
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        Console.WriteLine(" [x] {0}", message);
-                    };
+                        Console.WriteLine("Inside received...");
+                        string message = Encoding.UTF8.GetString(result.Body);
+                        Console.WriteLine($"Received message {message}");
+                        // _customerRepository.Insert(message);
+                    }
 
                     channel.BasicConsume(queue: queueName,
-                                        autoAck: true,
+                                        autoAck: false,
                                         consumer: consumer);
                 }
             }
