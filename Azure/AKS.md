@@ -185,6 +185,22 @@ Remove `--no-wait` parameter to wait for the call to complete
 
 ```
 
+### Run deployment in `AKS mode`
+
+```powershell
+
+./deployTechTalks.ps1 -IsLocalCluster $False
+
+```
+
+### Run deployment in `minikube mode`
+
+```powershell
+
+./deployTechTalks.ps1 -IsLocalCluster
+
+```
+
 OMS Workspace : abc2018sgws
 
 ### Store OMS Secret key and ID

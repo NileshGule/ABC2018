@@ -15,13 +15,17 @@ namespace TechTalksAPI.Messaging
             // var factory = new ConnectionFactory() { HostName = "localhost" };
             // var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 31672 };
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
-            
+
+            Console.WriteLine("Inside connection factory");
         
             using (var connection = factory.CreateConnection())
             {
+                Console.WriteLine("Inside connection");
+
                 using (var channel = connection.CreateModel())
                 {
 
+                    Console.WriteLine("Inside model");
                     channel.ExchangeDeclare(exchangeName, "direct");
                     
                     channel.QueueDeclare(queue: queueName,

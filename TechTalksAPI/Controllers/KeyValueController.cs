@@ -60,7 +60,7 @@ namespace TechTalksAPI.Controllers
                 return BadRequest();
             }
             _context.KeyValue.Add(item);
-            _context.SaveChanges();
+            // _context.SaveChanges();
 
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
