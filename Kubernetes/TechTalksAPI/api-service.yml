@@ -5,8 +5,8 @@ metadata:
   name: techtalksapi
   namespace: abc2018sg
 spec:
-  # type: NodePort
-  type: LoadBalancer
+  type: NodePort
+  # type: LoadBalancer
   ports:
   - port: 8080
   selector:
