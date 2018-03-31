@@ -31,3 +31,15 @@ dotnet new webapi --output TechTalksAPI
 ```bash
 dotnet sln add ./TechTalksAPI/TechTalksAPI.csproj
 ```
+
+### Create Dot.NET Core exe project named `TechTalksProcessor`
+
+```bash
+dotnet new console --output TechTalksProcessor
+```
+
+### Add `TechTalksProcessor` api project to `ABC2018` solution
+
+```bash
+dotnet sln add ./TechTalksProcessor/TechTalksProcessor.csproj
+```

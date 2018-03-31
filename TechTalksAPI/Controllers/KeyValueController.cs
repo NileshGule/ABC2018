@@ -14,8 +14,8 @@ namespace TechTalksAPI.Controllers
     public class KeyValueController : Controller
     {
         private readonly KeyValueContext _context;
-        private readonly ITechTalksMQ _messageQueue;
-        public KeyValueController(KeyValueContext context, ITechTalksMQ messageQueue)
+        private readonly ITechTalksEventPublisher _messageQueue;
+        public KeyValueController(KeyValueContext context, ITechTalksEventPublisher messageQueue)
         {
             _context = context;
             _messageQueue = messageQueue;

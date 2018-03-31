@@ -3,15 +3,12 @@ version: '3'
 services:
   sql.data:
     image: nileshgule/sqlclient
-    # hostname: 'sql2017'
-    # container_name: sql2017
     build:
       context: ../TechTalksDB
       dockerfile: Dockerfile
     
   webmvc:
     image: nileshgule/techtalksweb
-    # container_name: techtalksweb
     build:
       context: ../TechTalksWeb
       dockerfile: Dockerfile
@@ -22,7 +19,6 @@ services:
       
   techtalks.api:
     image: nileshgule/techtalksapi
-    # container_name: TechTalksAPI
     build:
       context: ../TechTalksAPI
       dockerfile: Dockerfile
@@ -30,5 +26,11 @@ services:
       - sql.data
     ports:
       - "8080:8080"
+
+  techtalks.processor:
+    image: nileshgule/techtalksprocessor
+    build:
+      context: ../TechTalksProcessor
+      dockerfile: Dockerfile
 
   

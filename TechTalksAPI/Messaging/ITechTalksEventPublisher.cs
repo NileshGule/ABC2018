@@ -1,6 +1,6 @@
 namespace TechTalksAPI.Messaging
 {
-    public interface ITechTalksMQ
+    public interface ITechTalksEventPublisher
     {
         void SendMessage();
     }

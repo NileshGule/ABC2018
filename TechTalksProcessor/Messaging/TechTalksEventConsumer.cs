@@ -1,15 +1,17 @@
 using System;
 using System.Text;
 using RabbitMQ.Client;
+using RabbitMQ.Client.Events;
 
-namespace TechTalksAPI.Messaging
+namespace TechTalksProcessor.Messaging
 {
-    public class TechTalksMQ : ITechTalksMQ
+    public class TechTalksEventConsumer : ITechTalksEventConsumer
     {
         private const string exchangeName = "TechTalksExchange";
         private const string queueName = "hello";
         private const string routingKey = "hello";
-        public void SendMessage()
+
+        public void ConsumeMessage()
         {
             Console.WriteLine("Inside send message");
             // var factory = new ConnectionFactory() { HostName = "localhost" };
@@ -24,7 +26,6 @@ namespace TechTalksAPI.Messaging
 
                 using (var channel = connection.CreateModel())
                 {
-
                     Console.WriteLine("Inside model");
                     channel.ExchangeDeclare(exchangeName, "direct");
                     
@@ -34,18 +35,24 @@ namespace TechTalksAPI.Messaging
                                     autoDelete: false,
                                     arguments: null);
 
-                    string message = "Hello World!";
-                    var body = Encoding.UTF8.GetBytes(message);
-
+                    
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
-                    channel.BasicPublish(exchange: exchangeName,
-                                        routingKey: routingKey,
-                                        basicProperties: null,
-                                        body: body);
-                    Console.WriteLine(" [x] Sent {0}", message);
+                    var consumer = new EventingBasicConsumer(channel);
+
+                    consumer.Received += (model, ea) =>
+                    {
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        Console.WriteLine(" [x] {0}", message);
+                    };
+
+                    channel.BasicConsume(queue: queueName,
+                                        autoAck: true,
+                                        consumer: consumer);
                 }
             }
         }
     }
+    
 }
