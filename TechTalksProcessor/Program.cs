@@ -31,7 +31,7 @@ namespace TechTalksProcessor
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory());
-                // .AddJsonFile($"appsettings.{environment}.json", optional: false);
+                .AddJsonFile($"appsettings.{environment}.json", optional: false);
 
             Configuration = builder.Build();
         }
