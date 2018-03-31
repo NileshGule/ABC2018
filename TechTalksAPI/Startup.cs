@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using TechTalksAPI.Models;
+using TechTalksAPI.Messaging;
 
 namespace TechTalksAPI
 {
@@ -27,6 +28,8 @@ namespace TechTalksAPI
         {
             services.AddDbContext<KeyValueContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<ITechTalksMQ, TechTalksMQ>();
 
             services.AddMvc();
         }
