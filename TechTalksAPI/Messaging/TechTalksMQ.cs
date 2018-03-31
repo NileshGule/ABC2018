@@ -22,7 +22,7 @@ namespace TechTalksAPI.Messaging
                 using (var channel = connection.CreateModel())
                 {
 
-                    channel.ExchangeDeclare(exchangeName, "durable");
+                    channel.ExchangeDeclare(exchangeName, "direct");
                     
                     channel.QueueDeclare(queue: queueName,
                                     durable: true,
