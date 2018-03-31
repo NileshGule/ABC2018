@@ -1,10 +1,16 @@
 Param(
-    [parameter(Mandatory=$false)][string]$subscriptionName="Visual Studio Enterprise",
-    [parameter(Mandatory=$false)][string]$resourceGroupName="ABC2018ResourceGroup",
-    [parameter(Mandatory=$false)][string]$resourceGroupLocaltion="East US",
-    [parameter(Mandatory=$false)][string]$clusterName="ABC2018AKSCluster",
-    [parameter(Mandatory=$false)][int16]$workerNodeCount=2,
-    [parameter(Mandatory=$false)][string]$kubernetesVersion="1.8.1"
+    [parameter(Mandatory=$false)]
+    [string]$subscriptionName="Visual Studio Enterprise",
+    [parameter(Mandatory=$false)]
+    [string]$resourceGroupName="ABC2018ResourceGroup",
+    [parameter(Mandatory=$false)]
+    [string]$resourceGroupLocaltion="East US",
+    [parameter(Mandatory=$false)]
+    [string]$clusterName="ABC2018AKSCluster",
+    [parameter(Mandatory=$false)]
+    [int16]$workerNodeCount=2,
+    [parameter(Mandatory=$false)]
+    [string]$kubernetesVersion="1.8.1"
 )
 
 # Set Azure subscription name

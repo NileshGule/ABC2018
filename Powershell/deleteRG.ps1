@@ -1,5 +1,6 @@
 Param(
-    [parameter(Mandatory=$false)][string]$resourceGroupName="ABC2018ResourceGroup"
+    [parameter(Mandatory=$false)]
+    [string]$resourceGroupName="ABC2018ResourceGroup"
 )
 
 # Delete AKS cluster

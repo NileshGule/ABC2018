@@ -1,8 +1,12 @@
 Param(
-    [parameter(Mandatory=$false)][bool]$IsLocalCluster=$true
+    [parameter(Mandatory=$false)]
+    [bool]$IsLocalCluster=$true,
+    [parameter(Mandatory=$false)]
+    [bool]$ProvisionAKSCluster=$false
 )
 
-if($IsLocalCluster){
+if($IsLocalCluster)
+{
 
     $minikubeStatus = minikube status
 
@@ -15,6 +19,11 @@ if($IsLocalCluster){
         Write-Host "Starting local minikube cluster" -ForegroundColor Yellow
         minikube start
     }
+}
+else 
+{
+    Write-Host "Provisioning AKS cluster with default parameters" -ForegroundColor Cyan
+    & ((Split-Path $MyInvocation.InvocationName) + "\initializeAKS.ps1") 
 }
 
 Write-Host "Starting deployment of TechTalks application and services" -ForegroundColor Yellow
@@ -55,3 +64,9 @@ Set-Location ~/projects/ABC2018/Kubernetes/TechTalksWeb
 kubectl apply --recursive --filename . 
 
 Write-Host "Tech talks web frontend deployed successfully" -ForegroundColor Cyan
+
+Write-Host "Deploying Tech Talks Processor" -ForegroundColor Yellow
+Set-Location ~/projects/ABC2018/Kubernetes/TechTalksProcessor
+kubectl apply --recursive --filename . 
+
+Write-Host "Tech talks Processor deployed successfully" -ForegroundColor Cyan

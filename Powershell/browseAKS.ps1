@@ -1,6 +1,8 @@
 Param(
-    [parameter(Mandatory=$false)][string]$resourceGroupName="ABC2018ResourceGroup",
-    [parameter(Mandatory=$false)][string]$clusterName="ABC2018AKSCluster"
+    [parameter(Mandatory=$false)]
+    [string]$resourceGroupName="ABC2018ResourceGroup",
+    [parameter(Mandatory=$false)]
+    [string]$clusterName="ABC2018AKSCluster"
 )
 
 # Browse AKS dashboard
