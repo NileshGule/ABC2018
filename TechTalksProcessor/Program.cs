@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechTalksProcessor.Messaging;
+using System.Threading;
 
 namespace TechTalksProcessor
 {
@@ -22,6 +23,7 @@ namespace TechTalksProcessor
             while (true)
             {
                 techTalksEventConsumer.ConsumeMessage();
+                Thread.Sleep(5000);
             }            
         }
 

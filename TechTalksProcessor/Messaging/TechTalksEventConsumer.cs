@@ -13,7 +13,6 @@ namespace TechTalksProcessor.Messaging
 
         public void ConsumeMessage()
         {
-            Console.WriteLine("Inside send message");
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
 
             using (var connection = factory.CreateConnection())
@@ -48,14 +47,16 @@ namespace TechTalksProcessor.Messaging
                     BasicGetResult result = channel.BasicGet(queueName, true);
                     if (result != null)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Inside received...");
                         string message = Encoding.UTF8.GetString(result.Body);
                         Console.WriteLine($"Received message {message}");
                         // _customerRepository.Insert(message);
+                        Console.ResetColor();
                     }
 
                     channel.BasicConsume(queue: queueName,
-                                        autoAck: false,
+                                        autoAck: true,
                                         consumer: consumer);
                 }
             }
