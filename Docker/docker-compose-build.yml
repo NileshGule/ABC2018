@@ -20,8 +20,8 @@ services:
   techtalks.api:
     image: nileshgule/techtalksapi
     build:
-      context: ../TechTalksAPI
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: Dockerfile-TechTalksAPI
     depends_on:
       - sql.data
     ports:
@@ -30,7 +30,7 @@ services:
   techtalks.processor:
     image: nileshgule/techtalksprocessor
     build:
-      context: ../TechTalksProcessor
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: Dockerfile-TechTalksProcessor
 
   

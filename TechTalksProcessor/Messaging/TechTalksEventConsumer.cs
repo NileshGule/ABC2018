@@ -3,6 +3,7 @@ using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
+using TechTalksModel;
 
 namespace TechTalksProcessor.Messaging
 {
@@ -37,13 +38,18 @@ namespace TechTalksProcessor.Messaging
 
                     var consumer = new EventingBasicConsumer(channel);
                     Console.WriteLine("Created consumer...");
-                    // consumer.Received += (model, ea) =>
-                    // {
-                    //     Console.WriteLine("Inside received...");
-                    //     var body = ea.Body;
-                    //     var message = Encoding.UTF8.GetString(body);
-                    //     Console.WriteLine(" [x] {0}", message);
-                    // };
+                    consumer.Received += (model, ea) =>
+                    {
+                        Console.WriteLine("Inside received...");
+                        var body = ea.Body;
+                        var message = Encoding.UTF8.GetString(body);
+                        var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
+                        Console.WriteLine($"Received message {message}");
+
+                        Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
+                        Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
+                        Console.WriteLine($"Categor : {techTalk.Category}");
+                    };
 
                     BasicGetResult result = channel.BasicGet(queueName, true);
                     if (result != null)
@@ -51,13 +57,12 @@ namespace TechTalksProcessor.Messaging
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Inside received...");
                         string message = Encoding.UTF8.GetString(result.Body);
-                         var customer = JsonConvert.DeserializeObject<Customer>(message);
+                         var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
                         Console.WriteLine($"Received message {message}");
 
-                        Console.WriteLine($"Customer first name : {customer.FirstName}");
-                        Console.WriteLine($"Customer Last name : {customer.LastName}");
-                        Console.WriteLine($"Email : {customer.EmailAddress}");
-                        Console.WriteLine($"Notification : {customer.NotifyMe}");
+                        Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
+                        Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
+                        Console.WriteLine($"Categor : {techTalk.Category}");
 
                         // _customerRepository.Insert(message);
                         Console.ResetColor();

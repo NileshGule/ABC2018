@@ -27,4 +27,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TechTalksModel\TechTalksModel.csproj" />
+  </ItemGroup>
 </Project>

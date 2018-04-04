@@ -7,7 +7,8 @@ COPY NuGet.config ./
 RUN dotnet restore
 
 COPY . ./
-RUN dotnet publish --configuration Release --output releaseOutput --no-restore
+
+RUN dotnet build --configuration Release --output releaseOutput --no-restore
 
 #build runtime image
 FROM microsoft/aspnetcore

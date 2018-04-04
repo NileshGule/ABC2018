@@ -2,6 +2,7 @@
 using System.Text;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
+using TechTalksModel;
 
 namespace TechTalksAPI.Messaging
 {
@@ -36,14 +37,13 @@ namespace TechTalksAPI.Messaging
                                     arguments: null);
 
                     string message = "Hello World!";
-                    var customer = new Customer {
-                        FirstName = "Nilesh",
-                        LastName = "Gule",
-                        EmailAddress = "ng@abc.com",
-                        NotifyMe = false
+                    var techTalk = new TechTalk {
+                        Id = 1,
+                        Name = "Azure bootcamp",
+                        Category = 1
                     };
                     // var body = Encoding.UTF8.GetBytes(message);
-                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(customer));                    
+                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(techTalk));                    
 
                     channel.QueueBind(queueName, exchangeName, routingKey);
 

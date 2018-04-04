@@ -1,0 +1,24 @@
+FROM microsoft/aspnetcore-build AS build-env
+
+WORKDIR /app
+
+COPY TechTalksAPI /TechTalksAPI/
+COPY TechTalksModel /TechTalksModel/
+
+# COPY NuGet.config ./
+
+WORKDIR /TechTalksAPI
+RUN dotnet restore
+
+#COPY . ./
+
+RUN dotnet publish --configuration Release --output releaseOutput --no-restore
+
+#build runtime image
+FROM microsoft/aspnetcore
+
+WORKDIR /TechTalksAPI
+
+COPY --from=build-env /TechTalksAPI/releaseOutput ./
+
+ENTRYPOINT ["dotnet", "TechTalksAPI.dll"]

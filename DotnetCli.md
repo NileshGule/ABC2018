@@ -61,3 +61,9 @@ dotnet new classlib --output TechTalksModel
 ```bash
 dotnet sln add ./TechTalksModel/TechTalksModel.csproj
 ```
+
+### Add `TechTalksMode` project reference to `TechTalksAPI` project
+
+```bash
+dotnet add reference ../TechTalksModel/TechTalksModel.csproj
+```
