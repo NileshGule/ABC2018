@@ -33,6 +33,7 @@ namespace TechTalksWeb.Controllers
                 var client = new WebClient();
                 var response = client.DownloadString(serviceUrl);
                 dynamic jsonData = JsonConvert.SerializeObject(response);
+                Console.WriteLine($"Data returned from API call : {jsonData}");
                 techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalk>>(jsonData));
             }
             catch (Exception)
@@ -48,7 +49,7 @@ namespace TechTalksWeb.Controllers
 
             techTalks.AddRange(result);
 
-            return PartialView("SearchServiceResults", result);
+            return PartialView("SearchServiceResults", techTalks);
 
         }
 

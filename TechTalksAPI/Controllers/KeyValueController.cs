@@ -20,15 +20,15 @@ namespace TechTalksAPI.Controllers
             _context = context;
             _messageQueue = messageQueue;
 
-            if (_context.KeyValues.Count() == 0)
+            if (_context.KeyValue.Count() == 0)
             {
-                _context.KeyValues.Add(new KeyValue { Key = "GoT", Value = "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B.Weiss." });
-                _context.KeyValues.Add(new KeyValue { Key = "MS", Value = "Microsoft" });
-                _context.KeyValues.Add(new KeyValue { Key = "OS", Value = "Open Source" });
-                _context.KeyValues.Add(new KeyValue { Key = "Doc", Value = "Doc-Chain aka Blockchain" });
-                _context.KeyValues.Add(new KeyValue { Key = "Kub", Value = "Kubernetes" });
-                _context.KeyValues.Add(new KeyValue { Key = "AZ", Value = "Azure is the best" });
-                _context.KeyValues.Add(new KeyValue { Key = "AKS", Value = "Azure Container Service (ACS)" });
+                _context.KeyValue.Add(new KeyValue { Key = "GoT", Value = "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B.Weiss." });
+                _context.KeyValue.Add(new KeyValue { Key = "MS", Value = "Microsoft" });
+                _context.KeyValue.Add(new KeyValue { Key = "OS", Value = "Open Source" });
+                _context.KeyValue.Add(new KeyValue { Key = "Doc", Value = "Doc-Chain aka Blockchain" });
+                _context.KeyValue.Add(new KeyValue { Key = "Kub", Value = "Kubernetes" });
+                _context.KeyValue.Add(new KeyValue { Key = "AZ", Value = "Azure is the best" });
+                _context.KeyValue.Add(new KeyValue { Key = "AKS", Value = "Azure Container Service (ACS)" });
                 _context.SaveChanges();
             }
         }
@@ -37,13 +37,13 @@ namespace TechTalksAPI.Controllers
         [HttpGet]
         public IEnumerable<KeyValue> GetAll()
         {
-            return _context.KeyValues.ToList();
+            return _context.KeyValue.ToList();
         }
 
         [HttpGet("{key}", Name = "GetByKey", Order = 1)]
         public IActionResult GetByKey(string key)
         {
-            var item = _context.KeyValues.FirstOrDefault(o => o.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = _context.KeyValue.FirstOrDefault(o => o.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
             if (item == null)
             {
                 return NotFound();
@@ -59,7 +59,7 @@ namespace TechTalksAPI.Controllers
             {
                 return BadRequest();
             }
-            _context.KeyValues.Add(item);
+            _context.KeyValue.Add(item);
             // _context.SaveChanges();
 
             Console.WriteLine("Sending messages");
@@ -78,7 +78,7 @@ namespace TechTalksAPI.Controllers
                 return BadRequest();
             }
 
-            var kv = _context.KeyValues.FirstOrDefault(t => t.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var kv = _context.KeyValue.FirstOrDefault(t => t.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
             if (kv == null)
             {
                 return NotFound();
@@ -87,7 +87,7 @@ namespace TechTalksAPI.Controllers
             kv.Value = item.Value;
             kv.Key = item.Key;
 
-            _context.KeyValues.Update(kv);
+            _context.KeyValue.Update(kv);
             _context.SaveChanges();
             return new NoContentResult();
         }
@@ -96,12 +96,14 @@ namespace TechTalksAPI.Controllers
         [HttpDelete("{key}")]
         public IActionResult Delete(string key)
         {
-            var kv = _context.KeyValues.FirstOrDefault(t => t.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var kv = _context.KeyValue
+                        .FirstOrDefault(t => t.Key.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                        
             if (kv == null)
             {
                 return NotFound();
             }
-            _context.KeyValues.Remove(kv);
+            _context.KeyValue.Remove(kv);
             _context.SaveChanges();
             return new NoContentResult();
         }

@@ -22,7 +22,7 @@ namespace TechTalksAPI.Models
         {
         }
 
-        public DbSet<KeyValue> KeyValues { get; set; }
-        public DbSet<TechTalk> TechTalks { get; set; }
+        public DbSet<KeyValue> KeyValue { get; set; }
+        public DbSet<TechTalk> TechTalk { get; set; }
     }
 }

@@ -20,10 +20,10 @@ namespace TechTalksAPI.Controllers
             _context = context;
             _messageQueue = messageQueue;
 
-            if (_context.TechTalks.Count() == 0)
+            if (_context.TechTalk.Count() == 0)
             {
-                _context.TechTalks.Add(new TechTalk {Id = 1, Name="Docker", Category = 1});
-                _context.TechTalks.Add(new TechTalk {Id = 2, Name="Kubernetes", Category = 2});
+                _context.TechTalk.Add(new TechTalk {Id = 1, Name="Docker", Category = 1});
+                _context.TechTalk.Add(new TechTalk {Id = 2, Name="Kubernetes", Category = 2});
                 _context.SaveChanges();
             }
         }
@@ -32,13 +32,13 @@ namespace TechTalksAPI.Controllers
         [HttpGet]
         public IEnumerable<TechTalk> GetAll()
         {
-            return _context.TechTalks.ToList();
+            return _context.TechTalk.ToList();
         }
 
-        [HttpGet("{key}", Name = "GetByKey", Order = 1)]
-        public IActionResult GetByKey(string key)
+        [HttpGet("{key}", Name = "GetTechTalkByKey", Order = 1)]
+        public IActionResult GetTechTalkByKey(string key)
         {
-            var item = _context.TechTalks.FirstOrDefault(o => o.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = _context.TechTalk.FirstOrDefault(o => o.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
             if (item == null)
             {
                 return NotFound();
@@ -54,14 +54,14 @@ namespace TechTalksAPI.Controllers
             {
                 return BadRequest();
             }
-            _context.TechTalks.Add(item);
+            _context.TechTalk.Add(item);
             // _context.SaveChanges();
 
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
 
-            // return CreatedAtRoute("GetByKey", new { key = item.Name }, item);
-            return new NoContentResult();
+            return CreatedAtRoute("GetTechTalkByKey", new { key = item.Name }, item);
+            // return new NoContentResult();
         }
 
         // PUT api/values/5
@@ -74,7 +74,7 @@ namespace TechTalksAPI.Controllers
                 return BadRequest();
             }
 
-            var kv = _context.TechTalks.FirstOrDefault(t => t.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var kv = _context.TechTalk.FirstOrDefault(t => t.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
             if (kv == null)
             {
                 return NotFound();
@@ -83,7 +83,7 @@ namespace TechTalksAPI.Controllers
             kv.Name = item.Name;
             kv.Category = item.Category;
 
-            _context.TechTalks.Update(kv);
+            _context.TechTalk.Update(kv);
             _context.SaveChanges();
             return new NoContentResult();
         }
@@ -92,12 +92,14 @@ namespace TechTalksAPI.Controllers
         [HttpDelete("{key}")]
         public IActionResult Delete(string key)
         {
-            var kv = _context.TechTalks.FirstOrDefault(t => t.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var kv = _context.TechTalk
+                        .FirstOrDefault(t => t.Name.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+
             if (kv == null)
             {
                 return NotFound();
             }
-            _context.TechTalks.Remove(kv);
+            _context.TechTalk.Remove(kv);
             _context.SaveChanges();
             return new NoContentResult();
         }
