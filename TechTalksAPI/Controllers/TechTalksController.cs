@@ -60,7 +60,8 @@ namespace TechTalksAPI.Controllers
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
 
-            return CreatedAtRoute("GetByKey", new { key = item.Name }, item);
+            // return CreatedAtRoute("GetByKey", new { key = item.Name }, item);
+            return new NoContentResult();
         }
 
         // PUT api/values/5
