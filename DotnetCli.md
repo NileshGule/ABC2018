@@ -49,3 +49,15 @@ dotnet sln add ./TechTalksProcessor/TechTalksProcessor.csproj
 ```bash
 dotnet add package Newtonsoft.Json
 ```
+
+### Create class library project named `TechTalksModel`
+
+```bash
+dotnet new classlib --output TechTalksModel
+```
+
+### Add `TechTalksModel` api project to `ABC2018` solution
+
+```bash
+dotnet sln add ./TechTalksModel/TechTalksModel.csproj
+```
