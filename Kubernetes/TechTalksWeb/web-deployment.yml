@@ -21,6 +21,9 @@ spec:
       containers:
       - name: techtalksweb
         image: nileshgule/techtalksweb
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
         ports:
         - containerPort: 80
           protocol: TCP
