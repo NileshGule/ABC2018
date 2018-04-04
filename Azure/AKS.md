@@ -16,8 +16,6 @@ az account set --subscription "Visual Studio Enterprise"
 
 az account set --subscription "Azure Pass"
 
-az account set --subscription "Sandbox CACIB"
-
 ```
 
 ## Enable AKS preview for subscription
