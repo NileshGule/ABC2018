@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using RabbitMQ.Client;
+using Newtonsoft.Json;
 
 namespace TechTalksAPI.Messaging
 {
@@ -35,7 +36,14 @@ namespace TechTalksAPI.Messaging
                                     arguments: null);
 
                     string message = "Hello World!";
-                    var body = Encoding.UTF8.GetBytes(message);
+                    var customer = new Customer {
+                        FirstName = "Nilesh",
+                        LastName = "Gule",
+                        EmailAddress = "ng@abc.com",
+                        NotifyMe = false
+                    };
+                    // var body = Encoding.UTF8.GetBytes(message);
+                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(customer));                    
 
                     channel.QueueBind(queueName, exchangeName, routingKey);
 

@@ -43,3 +43,9 @@ dotnet new console --output TechTalksProcessor
 ```bash
 dotnet sln add ./TechTalksProcessor/TechTalksProcessor.csproj
 ```
+
+### Add Newtonsoft.Json package
+
+```bash
+dotnet add package Newtonsoft.Json
+```

@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using Newtonsoft.Json;
 
 namespace TechTalksProcessor.Messaging
 {
@@ -50,7 +51,14 @@ namespace TechTalksProcessor.Messaging
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Inside received...");
                         string message = Encoding.UTF8.GetString(result.Body);
+                         var customer = JsonConvert.DeserializeObject<Customer>(message);
                         Console.WriteLine($"Received message {message}");
+
+                        Console.WriteLine($"Customer first name : {customer.FirstName}");
+                        Console.WriteLine($"Customer Last name : {customer.LastName}");
+                        Console.WriteLine($"Email : {customer.EmailAddress}");
+                        Console.WriteLine($"Notification : {customer.NotifyMe}");
+
                         // _customerRepository.Insert(message);
                         Console.ResetColor();
                     }
