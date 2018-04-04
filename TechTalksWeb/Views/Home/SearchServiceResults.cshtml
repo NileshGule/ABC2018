@@ -2,8 +2,25 @@
     ViewData["Title"] = "Service Search Result";
 }
 <h4 style="color:orange">@ViewData["Title"]</h4>
-<div class="alert alert-warning">
-    <span class="badge">@Model.Key</span>
-    <b>@Model.Value</b>
+<div>
+    <table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(var item in Model)
+      {
+        <tr>
+        <th scope="row">@item.Id</th>
+        <td>@item.Name</td>
+        <td>@item.Category</td>
+        </tr>        
+      }
+  </tbody>
+</table>
 </div>
 <hr class="divider">

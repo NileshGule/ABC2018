@@ -15,13 +15,14 @@ namespace TechTalksAPI.Models
         public string Value { get; set; }
     }
 
-    public class KeyValueContext : DbContext
+    public class TechTalksDBContext : DbContext
     {
-        public KeyValueContext(DbContextOptions<KeyValueContext> options)
+        public TechTalksDBContext(DbContextOptions<TechTalksDBContext> options)
             : base(options)
         {
         }
 
-        public DbSet<KeyValue> KeyValue { get; set; }
+        public DbSet<KeyValue> KeyValues { get; set; }
+        public DbSet<TechTalk> TechTalks { get; set; }
     }
 }

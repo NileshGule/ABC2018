@@ -20,27 +20,35 @@ namespace TechTalksWeb.Controllers
         public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)
         {
             // string url = "http://techtalksapi:8080/api/keyvalue";
-            string url = serviceUrl.TrimEnd('/') + "/" + searchText;
+            // string url = serviceUrl.TrimEnd('/') + "/" + searchText;
 
             // techtalksapi.abc2018sg:8080
 
-            string output = url;
+            // string output = url;
+            string output = serviceUrl;
 
+            List<TechTalk> techTalks = new List<TechTalk>();
             try
             {
                 var client = new WebClient();
-                client.Headers.Add("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/604.5.6 (KHTML, like Gecko) Version/11.0.3 Safari/604.5.6");
-                var response = client.DownloadString(url);
+                var response = client.DownloadString(serviceUrl);
                 dynamic jsonData = JsonConvert.SerializeObject(response);
+                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalk>>(jsonData));
             }
             catch (Exception)
             {
                 output = "not found";
             }
 
-            var result = new {Key = searchText, Value = output};
+            var result = new List<TechTalk> 
+            {
+                new TechTalk {Id = 1, Name="Docker", Category = 1},
+                new TechTalk {Id = 2, Name="Kubernetes", Category = 2}
+            };
 
-            return PartialView("ServiceSearchResults", result);
+            techTalks.AddRange(result);
+
+            return PartialView("SearchServiceResults", result);
 
         }
 

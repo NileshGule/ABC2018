@@ -28,7 +28,7 @@ namespace TechTalksAPI
         {
             services.AddMvc();
 
-            services.AddDbContext<KeyValueContext>(
+            services.AddDbContext<TechTalksDBContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ITechTalksEventPublisher, TechTalksEventPublisher>();

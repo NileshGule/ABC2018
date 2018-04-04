@@ -32,12 +32,7 @@
     </div>
     <div class="col-md-4">
         <h2>Search data-source</h2>
-        <ul>
-            @foreach (var kv in Model.keyValues)
-            {
-                <li>@kv.Key <span>--> @kv.Value</span></li>
-            }
-        </ul>
+        
     </div>
 </div>
 
@@ -106,7 +101,7 @@
 
 <script type="text/javascript">
     var localSearchurl = '@Url.Action("DisplayLocalSearchResult", "Home")';
-    var svcSearchurl = '@Url.Action("DisplayServiceSearchResult", "Home")';
+    var svcSearchurl = '@Url.Action("DisplayTechTalksResult", "Home")';
     function localSearchValue() {
         var keyWord = $('#keyword').val();
         $('#LocalSearchResult').load(localSearchurl, { searchText: keyWord });
@@ -114,6 +109,8 @@
     function serviceSearchValue() {
         var keyWord = $('#keyword').val();
         var svcUrl = $('#svcUrl').val();
+        <!-- alert('Svc url ' + svcUrl); -->
+        <!-- alert('keyword ' + keyWord); -->
         $('#ServiceSearchResult').load(svcSearchurl, { searchText: keyWord, serviceUrl: svcUrl });
     }
 </script>
