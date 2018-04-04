@@ -20,11 +20,6 @@ namespace TechTalksWeb.Controllers
         public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)
         {
             // string url = "http://techtalksapi:8080/api/keyvalue";
-            // string url = serviceUrl.TrimEnd('/') + "/" + searchText;
-
-            // techtalksapi.abc2018sg:8080
-
-            // string output = url;
             string output = serviceUrl;
 
             List<TechTalk> techTalks = new List<TechTalk>();
@@ -32,13 +27,15 @@ namespace TechTalksWeb.Controllers
             {
                 var client = new WebClient();
                 var response = client.DownloadString(serviceUrl);
-                dynamic jsonData = JsonConvert.SerializeObject(response);
-                Console.WriteLine($"Data returned from API call : {jsonData}");
-                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalk>>(jsonData));
+                Console.WriteLine($"Data returned from API call : {response}");
+                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalk>>(response));
+
+                Console.WriteLine($"Number of records in collecton : {techTalks.Count()}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                output = "not found";
+                Console.WriteLine("Inside exceptions block");
+                Console.WriteLine(ex.Message);
             }
 
             var result = new List<TechTalk> 
@@ -47,7 +44,10 @@ namespace TechTalksWeb.Controllers
                 new TechTalk {Id = 2, Name="Kubernetes", Category = 2}
             };
 
-            techTalks.AddRange(result);
+            if(techTalks.Count() == 0)
+            {
+                techTalks.AddRange(result);
+            }
 
             return PartialView("SearchServiceResults", techTalks);
 
