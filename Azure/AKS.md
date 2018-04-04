@@ -175,6 +175,14 @@ Remove `--no-wait` parameter to wait for the call to complete
 
 ```
 
+### Run powershell script to teardown services
+
+```powershell
+
+./teardownTechTalks.ps1
+
+```
+
 ### Run powershell script to delete resource group
 
 ```powershell
@@ -195,7 +203,7 @@ Remove `--no-wait` parameter to wait for the call to complete
 
 ```powershell
 
-./deployTechTalks.ps1 -IsLocalCluster
+./deployTechTalks.ps1 -IsLocalCluster $True
 
 ```
 
