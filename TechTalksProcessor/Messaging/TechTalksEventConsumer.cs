@@ -4,6 +4,7 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
 using TechTalksModel;
+using System.Threading;
 
 namespace TechTalksProcessor.Messaging
 {
@@ -12,6 +13,8 @@ namespace TechTalksProcessor.Messaging
         private const string exchangeName = "TechTalksExchange";
         private const string queueName = "hello";
         private const string routingKey = "hello";
+
+        private static ManualResetEvent _ResetEvent = new ManualResetEvent(false);
 
         public void ConsumeMessage()
         {
@@ -48,29 +51,16 @@ namespace TechTalksProcessor.Messaging
 
                         Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
                         Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
-                        Console.WriteLine($"Categor : {techTalk.Category}");
+                        Console.WriteLine($"Category : {techTalk.Category}");
                     };
-
-                    BasicGetResult result = channel.BasicGet(queueName, true);
-                    if (result != null)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Inside received...");
-                        string message = Encoding.UTF8.GetString(result.Body);
-                         var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
-                        Console.WriteLine($"Received message {message}");
-
-                        Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
-                        Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
-                        Console.WriteLine($"Categor : {techTalk.Category}");
-
-                        // _customerRepository.Insert(message);
-                        Console.ResetColor();
-                    }
 
                     channel.BasicConsume(queue: queueName,
                                         autoAck: true,
                                         consumer: consumer);
+
+                    Console.WriteLine($"Listening to events on {queueName}");
+                    
+                    _ResetEvent.WaitOne();
                 }
             }
         }

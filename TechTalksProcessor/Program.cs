@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TechTalksProcessor.Messaging;
-using System.Threading;
 
 namespace TechTalksProcessor
 {
@@ -20,11 +19,8 @@ namespace TechTalksProcessor
 
             Console.WriteLine("Starting to read from the queue");
 
-            while (true)
-            {
-                techTalksEventConsumer.ConsumeMessage();
-                Thread.Sleep(5000);
-            }            
+            techTalksEventConsumer.ConsumeMessage();
+                  
         }
 
         static void ConfigureEnvironment()
