@@ -44,7 +44,7 @@ dotnet new console --output TechTalksProcessor
 dotnet sln add ./TechTalksProcessor/TechTalksProcessor.csproj
 ```
 
-### Add Newtonsoft.Json package
+### Add `Newtonsoft.Json` package
 
 ```bash
 dotnet add package Newtonsoft.Json
@@ -90,4 +90,16 @@ dotnet sln add ./TechTalksELKProcessor/TechTalksELKProcessor.csproj
 
 ```bash
 dotnet add package NEST
+```
+
+### Add `ElasticSerach.Net` package to the project `TechTalksELKProcessor`
+
+```bash
+dotnet add package ElasticSearch.Net
+```
+
+### Add `RabbitMQ.Client` package
+
+```bash
+dotnet add package RabbitMQ.Client
 ```
