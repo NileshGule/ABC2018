@@ -73,3 +73,15 @@ dotnet add reference ../TechTalksModel/TechTalksModel.csproj
 ```bash
 dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
 ```
+
+### Create Dot.NET Core exe project named `TechTalksELKProcessor`
+
+```bash
+dotnet new console --output TechTalksELKProcessor
+```
+
+### Add `TechTalksELKProcessor` api project to `ABC2018` solution
+
+```bash
+dotnet sln add ./TechTalksELKProcessor/TechTalksELKProcessor.csproj
+```

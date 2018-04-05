@@ -40,7 +40,7 @@ namespace TechTalksProcessor.Messaging
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
                     var consumer = new EventingBasicConsumer(channel);
-                    Console.WriteLine("Created consumer...");
+                  
                     consumer.Received += (model, ea) =>
                     {
                         Console.WriteLine("Inside received...");
