@@ -85,3 +85,9 @@ dotnet new console --output TechTalksELKProcessor
 ```bash
 dotnet sln add ./TechTalksELKProcessor/TechTalksELKProcessor.csproj
 ```
+
+### Add `NEST` package to the project `TechTalksELKProcessor`
+
+```bash
+dotnet add package NEST
+```
