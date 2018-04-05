@@ -22,13 +22,13 @@ namespace TechTalksWeb.Controllers
             // string url = "http://techtalksapi:8080/api/keyvalue";
             string output = serviceUrl;
 
-            List<TechTalk> techTalks = new List<TechTalk>();
+            List<TechTalkDTO> techTalks = new List<TechTalkDTO>();
             try
             {
                 var client = new WebClient();
                 var response = client.DownloadString(serviceUrl);
                 Console.WriteLine($"Data returned from API call : {response}");
-                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalk>>(response));
+                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalkDTO>>(response));
 
                 Console.WriteLine($"Number of records in collecton : {techTalks.Count()}");
             }
@@ -38,10 +38,10 @@ namespace TechTalksWeb.Controllers
                 Console.WriteLine(ex.Message);
             }
 
-            var result = new List<TechTalk> 
+            var result = new List<TechTalkDTO> 
             {
-                new TechTalk {Id = 1, Name="Docker", CategoryId = 1},
-                new TechTalk {Id = 2, Name="Kubernetes", CategoryId = 2}
+                new TechTalkDTO {Id = 1, Name="Docker", CategoryId = 1},
+                new TechTalkDTO {Id = 2, Name="Kubernetes", CategoryId = 2}
             };
 
             if(techTalks.Count() == 0)

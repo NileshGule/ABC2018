@@ -11,7 +11,7 @@ namespace TechTalksAPI.Models
         public string CategoryName { get; set; }
         public string Description { get; set; }
 
-        public virtual ICollection<TechTalk> TechTalks { get; set; }
+        // public virtual ICollection<TechTalk> TechTalks { get; set; }
     }
     
 }

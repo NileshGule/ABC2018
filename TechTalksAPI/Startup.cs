@@ -27,12 +27,15 @@ namespace TechTalksAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-            .AddJsonOptions(
+            .AddJsonOptions
+            (
                 options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
-            services.AddDbContext<TechTalksDBContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<TechTalksDBContext>
+            (
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddTransient<ITechTalksEventPublisher, TechTalksEventPublisher>();
 

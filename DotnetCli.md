@@ -67,3 +67,9 @@ dotnet sln add ./TechTalksModel/TechTalksModel.csproj
 ```bash
 dotnet add reference ../TechTalksModel/TechTalksModel.csproj
 ```
+
+### Add `Automapper` to the project
+
+```bash
+dotnet add package AutoMapper.Extensions.Microsoft.DependencyInjection
+```

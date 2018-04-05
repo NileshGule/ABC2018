@@ -28,7 +28,7 @@ namespace TechTalksAPI.Controllers
                     {
                         Id = 1, 
                         TechTalkName="Docker", 
-                        Category = new Categories{Id = 1}
+                        // Category = new Categories{Id = 1}
                     }
                 );
                 
@@ -37,7 +37,7 @@ namespace TechTalksAPI.Controllers
                     {
                         Id = 2, 
                         TechTalkName="Kubernetes", 
-                        Category = new Categories{Id = 2}
+                        // Category = new Categories{Id = 2}
                     }
                 );
                 
@@ -50,7 +50,7 @@ namespace TechTalksAPI.Controllers
         public IEnumerable<TechTalk> GetAll()
         {
             return _context.TechTalk
-            .Include(t => t.Category)
+            // .Include(t => t.Category)
             .ToList();
             
         }
@@ -101,7 +101,7 @@ namespace TechTalksAPI.Controllers
             }
 
             kv.TechTalkName = item.TechTalkName;
-            kv.Category = item.Category;
+            // kv.Category = item.Category;
 
             _context.TechTalk.Update(kv);
             _context.SaveChanges();

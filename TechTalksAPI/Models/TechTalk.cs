@@ -9,10 +9,10 @@ namespace TechTalksAPI.Models
         [Key]
         public int Id { get; set; }
         public string TechTalkName { get; set; }
-        [ForeignKey("Category")]
+        // [ForeignKey("Category")]
         public int CategoryId { get; set; }
         
-        public Categories Category { get; set;}
+        // public virtual Categories Category { get; set;}
     }
     
 }
