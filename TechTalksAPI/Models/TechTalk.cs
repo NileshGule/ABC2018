@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TechTalksAPI.Models
 {
@@ -7,8 +8,11 @@ namespace TechTalksAPI.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Category { get; set; }
+        public string TechTalkName { get; set; }
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
+        
+        public Categories Category { get; set;}
     }
     
 }

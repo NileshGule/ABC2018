@@ -40,8 +40,8 @@ namespace TechTalksWeb.Controllers
 
             var result = new List<TechTalk> 
             {
-                new TechTalk {Id = 1, Name="Docker", Category = 1},
-                new TechTalk {Id = 2, Name="Kubernetes", Category = 2}
+                new TechTalk {Id = 1, Name="Docker", CategoryId = 1},
+                new TechTalk {Id = 2, Name="Kubernetes", CategoryId = 2}
             };
 
             if(techTalks.Count() == 0)
