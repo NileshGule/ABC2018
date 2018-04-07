@@ -1,0 +1,24 @@
+FROM microsoft/aspnetcore-build AS build-env
+
+WORKDIR /app
+
+COPY TechTalksELKProcessor /TechTalksELKProcessor/
+# COPY TechTalksModel /TechTalksModel/
+
+# COPY NuGet.config ./
+
+WORKDIR /TechTalksELKProcessor
+RUN dotnet restore
+
+#COPY . ./
+
+RUN dotnet publish --configuration Release --output releaseOutput --no-restore
+
+#build runtime image
+FROM microsoft/aspnetcore
+
+WORKDIR /TechTalksELKProcessor
+
+COPY --from=build-env /TechTalksELKProcessor/releaseOutput ./
+
+ENTRYPOINT ["dotnet", "TechTalksELKProcessor.dll"]

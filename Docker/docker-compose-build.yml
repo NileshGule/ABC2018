@@ -33,4 +33,10 @@ services:
       context: ..
       dockerfile: Dockerfile-TechTalksProcessor
 
+  techtalks.elkprocessor:
+    image: nileshgule/techtalkselkprocessor
+    build:
+      context: ..
+      dockerfile: Dockerfile-TechTalksELKProcessor
+
   

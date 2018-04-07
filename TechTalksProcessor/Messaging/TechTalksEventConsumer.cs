@@ -11,7 +11,7 @@ namespace TechTalksProcessor.Messaging
     public class TechTalksEventConsumer : ITechTalksEventConsumer
     {
         private const string exchangeName = "TechTalksExchange";
-        private const string queueName = "hello";
+        // private const string queueName = "hello";
         private const string routingKey = "hello";
 
         private static ManualResetEvent _ResetEvent = new ManualResetEvent(false);
@@ -27,15 +27,16 @@ namespace TechTalksProcessor.Messaging
                 using (var channel = connection.CreateModel())
                 {
                     Console.WriteLine("Inside model");
-                    channel.ExchangeDeclare(exchangeName, "direct");
+                    channel.ExchangeDeclare(exchangeName, "fanout");
                     
-                    channel.QueueDeclare(queue: queueName,
-                                    durable: true,
-                                    exclusive: false,
-                                    autoDelete: false,
-                                    arguments: null);
+                    string queueName = channel.QueueDeclare().QueueName;
+                    // channel.QueueDeclare(queue: queueName,
+                    //                 durable: true,
+                    //                 exclusive: false,
+                    //                 autoDelete: false,
+                    //                 arguments: null);
 
-                    channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
+                    // channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
                     
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
@@ -43,7 +44,7 @@ namespace TechTalksProcessor.Messaging
                   
                     consumer.Received += (model, ea) =>
                     {
-                        Console.WriteLine("Inside received...");
+                        Console.WriteLine("Inside RabbitMQ receiver...");
                         var body = ea.Body;
                         var message = Encoding.UTF8.GetString(body);
                         var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
@@ -64,6 +65,5 @@ namespace TechTalksProcessor.Messaging
                 }
             }
         }
-    }
-    
+    }    
 }

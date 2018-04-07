@@ -14,8 +14,7 @@ namespace TechTalksAPI.Messaging
         public void SendMessage()
         {
             Console.WriteLine("Inside send message");
-            // var factory = new ConnectionFactory() { HostName = "localhost" };
-            // var factory = new ConnectionFactory() { HostName = "rabbitmq", Port = 31672 };
+        
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
 
             Console.WriteLine("Inside connection factory");
@@ -28,24 +27,24 @@ namespace TechTalksAPI.Messaging
                 {
 
                     Console.WriteLine("Inside model");
-                    channel.ExchangeDeclare(exchangeName, "direct");
+                    channel.ExchangeDeclare(exchangeName, "fanout");
                     
-                    channel.QueueDeclare(queue: queueName,
-                                    durable: true,
-                                    exclusive: false,
-                                    autoDelete: false,
-                                    arguments: null);
+                    // channel.QueueDeclare(queue: queueName,
+                    //                 durable: true,
+                    //                 exclusive: false,
+                    //                 autoDelete: false,
+                    //                 arguments: null);
 
                     string message = "Hello World!";
                     var techTalk = new TechTalk {
-                        Id = 1,
+                        Id = new Random().Next(100) ,
                         Name = "Azure bootcamp",
-                        Category = 1
+                        Category = new Random().Next(1,5)
                     };
                     // var body = Encoding.UTF8.GetBytes(message);
                     var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(techTalk));                    
 
-                    channel.QueueBind(queueName, exchangeName, routingKey);
+                    // channel.QueueBind(queueName, exchangeName, routingKey);
 
                     channel.BasicPublish(exchange: exchangeName,
                                         routingKey: routingKey,
