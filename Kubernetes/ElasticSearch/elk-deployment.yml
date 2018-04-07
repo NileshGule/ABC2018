@@ -1,10 +1,11 @@
 apiVersion: apps/v1beta1
-kind: StatefulSet
+# kind: StatefulSet
+kind: Deployment
 metadata:
   name: elk-deployment
   namespace: abc2018sg
 spec:
-  serviceName: elk
+  # serviceName: elk
   # replicas: 3
   replicas: 1  
   template:
@@ -28,6 +29,11 @@ spec:
       containers:        
       - name: elk-container
         image: sebp/elk
+        resources:
+          requests:
+            memory: "2Gi"
+          limits:
+            memory: "3Gi"
         ports:
           - name: elasticsearch
             protocol: TCP

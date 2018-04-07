@@ -15,6 +15,11 @@ spec:
       containers:
       - name: sql2017
         image: microsoft/mssql-server-linux
+        resources:
+          requests:
+            memory: "3Gi"
+          limits:
+            memory: "4Gi"
         ports:
         - name: dbport
           containerPort: 1433
