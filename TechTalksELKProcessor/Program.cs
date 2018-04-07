@@ -38,14 +38,6 @@ namespace TechTalksELKProcessor
                     channel.ExchangeDeclare(exchangeName, "fanout");
                     
                     string queueName = channel.QueueDeclare().QueueName;
-
-                    // channel.QueueDeclare(queue: queueName,
-                    //                 durable: true,
-                    //                 exclusive: false,
-                    //                 autoDelete: false,
-                    //                 arguments: null);
-
-                    // channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
                     
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
@@ -60,9 +52,7 @@ namespace TechTalksELKProcessor
                     Console.WriteLine($"Listening to events on {queueName}");
                     _ResetEvent.WaitOne();
                 }
-            }
-
-            
+            }            
         }
 
         private static void RabbitMQBasicMessageHandler(object model, BasicDeliverEventArgs ea)

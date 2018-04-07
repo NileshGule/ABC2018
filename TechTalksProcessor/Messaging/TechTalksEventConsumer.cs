@@ -30,30 +30,12 @@ namespace TechTalksProcessor.Messaging
                     channel.ExchangeDeclare(exchangeName, "fanout");
                     
                     string queueName = channel.QueueDeclare().QueueName;
-                    // channel.QueueDeclare(queue: queueName,
-                    //                 durable: true,
-                    //                 exclusive: false,
-                    //                 autoDelete: false,
-                    //                 arguments: null);
-
-                    // channel.BasicQos(prefetchSize: 0, prefetchCount: 1, global: false);
                     
                     channel.QueueBind(queueName, exchangeName, routingKey);
 
                     var consumer = new EventingBasicConsumer(channel);
                   
-                    consumer.Received += (model, ea) =>
-                    {
-                        Console.WriteLine("Inside RabbitMQ receiver...");
-                        var body = ea.Body;
-                        var message = Encoding.UTF8.GetString(body);
-                        var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
-                        Console.WriteLine($"Received message {message}");
-
-                        Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
-                        Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
-                        Console.WriteLine($"Category : {techTalk.Category}");
-                    };
+                    consumer.Received += RabbitMQEventHandler;
 
                     channel.BasicConsume(queue: queueName,
                                         autoAck: true,
@@ -64,6 +46,19 @@ namespace TechTalksProcessor.Messaging
                     _ResetEvent.WaitOne();
                 }
             }
+        }
+
+        private static void RabbitMQEventHandler(object model, BasicDeliverEventArgs ea)
+        {
+            Console.WriteLine("Inside RabbitMQ receiver...");
+            var body = ea.Body;
+            var message = Encoding.UTF8.GetString(body);
+            var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
+            Console.WriteLine($"Received message {message}");
+
+            Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
+            Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
+            Console.WriteLine($"Category : {techTalk.Category}");
         }
     }    
 }
