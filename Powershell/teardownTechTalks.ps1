@@ -30,6 +30,12 @@ kubectl delete --recursive --filename .
 
 Write-Host "RabbitMQ service deleted successfully" -ForegroundColor Cyan
 
+Write-Host "Deleting ELK service" -ForegroundColor Yellow
+Set-Location ~/projects/ABC2018/Kubernetes/ElasticSearch
+kubectl delete --recursive --filename . 
+
+Write-Host "ELK service deleted successfully" -ForegroundColor Cyan
+
 Set-Location ~/projects/ABC2018/Kubernetes
 
 Write-Host "Deleting Persistant Volume Claim" -ForegroundColor Yellow
@@ -45,3 +51,5 @@ kubectl delete --filename 00_ABCNamespace.yml
 Write-Host "Namespace deleted successfully" -ForegroundColor Cyan
 
 Write-Host "All the services related to Tech Talks application have been successfully deleted" -ForegroundColor Cyan
+
+Set-Location ~/projects/ABC2018/Powershell

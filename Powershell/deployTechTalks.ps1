@@ -44,6 +44,12 @@ Write-Host "Creating Persistant Volume Claim" -ForegroundColor Yellow
 kubectl apply --filename 02_PersistantVolumeClaim.yml
 Write-Host "Persistant Volume Claim created successfully" -ForegroundColor Cyan
 
+Write-Host "Deploying ELK service" -ForegroundColor Yellow
+Set-Location ~/projects/ABC2018/Kubernetes/ElasticSearch
+kubectl apply --recursive --filename . 
+
+Write-Host "ELK service deployed successfully" -ForegroundColor Cyan
+
 Write-Host "Deploying RabbitMQ service" -ForegroundColor Yellow
 Set-Location ~/projects/ABC2018/Kubernetes/RabbitMQ
 kubectl apply --recursive --filename . 
@@ -75,3 +81,5 @@ kubectl apply --recursive --filename .
 Write-Host "Tech talks Processor deployed successfully" -ForegroundColor Cyan
 
 Write-Host "All the services related to Tech Talks application have been successfully deployed" -ForegroundColor Cyan
+
+Set-Location ~/projects/ABC2018/Powershell
