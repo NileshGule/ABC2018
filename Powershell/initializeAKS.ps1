@@ -1,6 +1,7 @@
 Param(
     [parameter(Mandatory=$false)]
-    [string]$subscriptionName="Visual Studio Enterprise",
+    # [string]$subscriptionName="Visual Studio Enterprise",
+    [string]$subscriptionName="Azure Pass",
     [parameter(Mandatory=$false)]
     [string]$resourceGroupName="ABC2018ResourceGroup",
     [parameter(Mandatory=$false)]

@@ -218,3 +218,27 @@ kubectl create secret generic omsagent-secret \
 --from-literal=KEY=QtXDHX/3Dm9/Z05W+73Xhd/T87DDFg6ZOBmbzRm2p9fhdQbZJ2Bj6B7Etumxm25gAlFamMQjwPUdC4/cTDSJzQ==
 
 ```
+
+### List all Kubernetes contexts
+
+```bash
+
+kubectl config get-contexts
+
+```
+
+### Set Kubernetes context to `minicube`
+
+```bash
+
+kubectl config use-context minicube
+
+```
+
+### Set Kubernetes context to `ABC2018AKSCluster`
+
+```bash
+
+kubectl config use-context ABC2018AKSCluster
+
+```
