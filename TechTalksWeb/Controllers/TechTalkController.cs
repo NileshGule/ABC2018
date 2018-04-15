@@ -12,26 +12,25 @@ using TechTalksWeb.Models;
 
 namespace TechTalksWeb.Controllers
 {
-    public class HomeController : Controller
+    public class TechTalkController : Controller
     {
+        private const string API_BASE_URL = "http://techtalksapi:8080/api/techtalks/";
         public IActionResult Index()
         {
-            string url = "http://techtalksapi:8080/api/techtalks";
-            string output = url;
-
             List<TechTalkDTO> techTalks = new List<TechTalkDTO>();
+            
             try
             {
                 var client = new WebClient();
-                var response = client.DownloadString(url);
+                var response = client.DownloadString(API_BASE_URL);
                 Console.WriteLine($"Data returned from API call : {response}");
+            
                 techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalkDTO>>(response));
 
                 Console.WriteLine($"Number of records in collecton : {techTalks.Count()}");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Inside exceptions block");
                 Console.WriteLine(ex.Message);
             }
 
@@ -51,20 +50,21 @@ namespace TechTalksWeb.Controllers
 
         public IActionResult Details(int id)
         {
-            string url = "http://techtalksapi:8080/api/techtalks/" + id;
-            string output = url;
-
+            string url = String.Concat(API_BASE_URL, id);
+            
             TechTalkDTO techTalk = null;
+            
             try
             {
                 var client = new WebClient();
                 var response = client.DownloadString(url);
+                
                 Console.WriteLine($"Data returned from API call : {response}");
+                
                 techTalk  = JsonConvert.DeserializeObject<TechTalkDTO>(response);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Inside exceptions block");
                 Console.WriteLine(ex.Message);
             }
 
@@ -87,9 +87,6 @@ namespace TechTalksWeb.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([FromForm]TechTalkDTO techTalk1)
         {
-            string url = "http://techtalksapi:8080/api/techtalks/";
-            string output = url;
-
             Console.WriteLine($"Talk name : {techTalk1.TechTalkName}");
             Console.WriteLine($"Category ID : {techTalk1.CategoryId}");
 
@@ -97,30 +94,33 @@ namespace TechTalksWeb.Controllers
             {
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                
                 Console.WriteLine($"Data is about to be sent to API call");
+                
                 string stringData = JsonConvert.SerializeObject(techTalk1);
                 var contentData = new StringContent(stringData, System.Text.Encoding.UTF8,"application/json");
-                HttpResponseMessage response = client.PostAsync(url, contentData).Result;
+                
+                HttpResponseMessage response = client.PostAsync(API_BASE_URL, contentData).Result;
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Inside exceptions block");
                 Console.WriteLine(ex.Message);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Delete(int id)
         {
-            string url = "http://techtalksapi:8080/api/techtalks/" + id;
-            string output = url;
+            string url = String.Concat(API_BASE_URL, id);
             
             try
             {
                 var client = new HttpClient();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                
                 Console.WriteLine($"Data is about to be deleted using API call");
+                
                 HttpResponseMessage response = client.DeleteAsync(url).Result;
 
                 if(response.IsSuccessStatusCode)
@@ -130,47 +130,10 @@ namespace TechTalksWeb.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Inside exceptions block");
                 Console.WriteLine(ex.Message);
             }
             
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)
-        {
-            // string url = "http://techtalksapi:8080/api/keyvalue";
-            string output = serviceUrl;
-
-            List<TechTalkDTO> techTalks = new List<TechTalkDTO>();
-            try
-            {
-                var client = new WebClient();
-                var response = client.DownloadString(serviceUrl);
-                Console.WriteLine($"Data returned from API call : {response}");
-                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalkDTO>>(response));
-
-                Console.WriteLine($"Number of records in collecton : {techTalks.Count()}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Inside exceptions block");
-                Console.WriteLine(ex.Message);
-            }
-
-            var result = new List<TechTalkDTO> 
-            {
-                new TechTalkDTO {Id = 1, TechTalkName="Docker", CategoryId = 1},
-                new TechTalkDTO {Id = 2, TechTalkName="Kubernetes", CategoryId = 2}
-            };
-
-            if(techTalks.Count() == 0)
-            {
-                techTalks.AddRange(result);
-            }
-
-            return PartialView("SearchServiceResults", techTalks);
-
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult About()
