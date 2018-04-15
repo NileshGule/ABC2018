@@ -75,18 +75,18 @@ namespace TechTalksAPI.Controllers
                 return BadRequest();
             }
             _context.TechTalk.Add(item);
-            // _context.SaveChanges();
 
+            _context.SaveChanges();
+            
+            
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
 
             return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
-            // return new NoContentResult();
         }
 
         // PUT api/values/5
         [HttpPut("{key}")]
-
         public IActionResult Update(string key, [FromBody]TechTalk item)
         {
             if (item == null || !item.TechTalkName.Equals(key, StringComparison.InvariantCultureIgnoreCase))

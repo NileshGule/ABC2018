@@ -25,17 +25,17 @@ if not exists (select * from sysobjects where name='Categories' and xtype='U')
         PRINT 'Creating Categories table'
         CREATE TABLE Categories 
         (
-            Id INT NOT NULL PRIMARY KEY, 
+            Id INT IDENTITY(1,1) PRIMARY KEY,
             categoryName NVARCHAR(50), 
             description NVARCHAR(100)
         )
 
         PRINT 'Inserting default values in categories table...'
-        INSERT INTO Categories VALUES(1, 'Meetup', 'Community event organized via meetup');
-        INSERT INTO Categories VALUES(2, 'Free Conference', 'Free Tech Conference');
-        INSERT INTO Categories VALUES(3, 'Paid Conference', 'Paid Tech Conference');
-        INSERT INTO Categories VALUES(4, 'Hackathon', 'Hackathon');
-        INSERT INTO Categories VALUES(5, 'Eventribe', 'Community event organized via Eventribe');
+        INSERT INTO Categories(categoryName, description) VALUES('Meetup', 'Community event organized via meetup');
+        INSERT INTO Categories(categoryName, description) VALUES('Free Conference', 'Free Tech Conference');
+        INSERT INTO Categories(categoryName, description) VALUES('Paid Conference', 'Paid Tech Conference');
+        INSERT INTO Categories(categoryName, description) VALUES('Hackathon', 'Hackathon');
+        INSERT INTO Categories(categoryName, description) VALUES('Eventribe', 'Community event organized via Eventribe');
     END
 GO
 
@@ -44,14 +44,14 @@ if not exists (select * from sysobjects where name='TechTalk' and xtype='U')
         PRINT 'Creating TechTalk table'
         CREATE TABLE TechTalk 
         (
-            Id INT NOT NULL PRIMARY KEY, 
+            Id INT IDENTITY(1,1) PRIMARY KEY,             
             techtalkname NVARCHAR(50), 
             categoryId INT REFERENCES Categories(Id)
         )
 
         PRINT 'Inserting default values into TechTalk table'
-        INSERT INTO TechTalk VALUES (1, 'Scaling Docker Containers', 1); 
-        INSERT INTO TechTalk VALUES (2, 'Azure Container Services', 2);
+        INSERT INTO TechTalk(techtalkname, categoryId) VALUES ('Scaling Docker Containers', 1); 
+        INSERT INTO TechTalk(techtalkname, categoryId) VALUES ('Azure Container Services', 2);
     END
 GO
 

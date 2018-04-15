@@ -1,5 +1,11 @@
 Write-Host "Starting deletion of TechTalks application and services" -ForegroundColor Yellow
 
+Write-Host "Deleting Tech Talks ELK Consumer" -ForegroundColor Yellow
+Set-Location ~/projects/ABC2018/Kubernetes/TechTalksELKProcessor
+kubectl delete --recursive --filename . 
+
+Write-Host "Tech Talks ELK Consumer deleted successfully" -ForegroundColor Cyan
+
 Write-Host "Deleting Tech Talks Processor" -ForegroundColor Yellow
 Set-Location ~/projects/ABC2018/Kubernetes/TechTalksProcessor
 kubectl delete --recursive --filename . 
