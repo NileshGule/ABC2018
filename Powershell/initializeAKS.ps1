@@ -9,7 +9,7 @@ Param(
     [parameter(Mandatory=$false)]
     [string]$clusterName="ABC2018AKSCluster",
     [parameter(Mandatory=$false)]
-    [int16]$workerNodeCount=2,
+    [int16]$workerNodeCount=3,
     [parameter(Mandatory=$false)]
     [string]$kubernetesVersion="1.8.1"
 )

@@ -214,9 +214,8 @@ OMS Workspace : abc2018sgws
 ```bash
 
 kubectl create secret generic omsagent-secret \
---from-literal=WSID=feb84307-b1ba-414e-baa8-ec8200ce9dee \
---from-literal=KEY=QtXDHX/3Dm9/Z05W+73Xhd/T87DDFg6ZOBmbzRm2p9fhdQbZJ2Bj6B7Etumxm25gAlFamMQjwPUdC4/cTDSJzQ==
-
+--from-literal=WSID=bff3ad60-541a-49ff-93f9-e52d2facbb41 \
+--from-literal=KEY=u0eILhl3F9d999+NsUrU+SPUFWSiPhRKnx26KBArmfEpp2xMrCJrcdI+N9zTnlKFJD+7A1JiUmS9fW6BihfeCg==
 ```
 
 ### List all Kubernetes contexts

@@ -45,7 +45,7 @@ if not exists (select * from sysobjects where name='TechTalk' and xtype='U')
         CREATE TABLE TechTalk 
         (
             Id INT NOT NULL PRIMARY KEY, 
-            name NVARCHAR(50), 
+            techtalkname NVARCHAR(50), 
             categoryId INT REFERENCES Categories(Id)
         )
 
