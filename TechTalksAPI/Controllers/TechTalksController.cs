@@ -56,14 +56,11 @@ namespace TechTalksAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTechTalkById", Order = 1)]
-        public IActionResult GetById(int id)
+        // public IActionResult GetById(int id)
+        public TechTalk GetById(int id)
         {
             var item = _context.TechTalk.FirstOrDefault(o => o.Id.Equals(id));
-            if (item == null)
-            {
-                return NotFound();
-            }
-            return new ObjectResult(item);
+            return item;
         }
 
         // POST api/values
@@ -74,10 +71,9 @@ namespace TechTalksAPI.Controllers
             {
                 return BadRequest();
             }
-            _context.TechTalk.Add(item);
 
-            _context.SaveChanges();
-            
+            _context.TechTalk.Add(item);
+            _context.SaveChanges();            
             
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
@@ -86,41 +82,43 @@ namespace TechTalksAPI.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{key}")]
-        public IActionResult Update(string key, [FromBody]TechTalk item)
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, [FromBody]TechTalk item)
         {
-            if (item == null || !item.TechTalkName.Equals(key, StringComparison.InvariantCultureIgnoreCase))
+            if (item == null || !item.Id.Equals(id))
             {
                 return BadRequest();
             }
 
-            var kv = _context.TechTalk.FirstOrDefault(t => t.TechTalkName.Equals(key, StringComparison.InvariantCultureIgnoreCase));
-            if (kv == null)
+            var techTalk = _context.TechTalk.FirstOrDefault(t => t.Id.Equals(id));
+            if (techTalk == null)
             {
                 return NotFound();
             }
 
-            kv.TechTalkName = item.TechTalkName;
+            techTalk.TechTalkName = item.TechTalkName;
             // kv.Category = item.Category;
 
-            _context.TechTalk.Update(kv);
+            _context.TechTalk.Update(techTalk);
             _context.SaveChanges();
             return new NoContentResult();
         }
 
         // DELETE api/values/5
-        [HttpDelete("{key}")]
-        public IActionResult Delete(string key)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
             var kv = _context.TechTalk
-                        .FirstOrDefault(t => t.TechTalkName.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+                        .FirstOrDefault(t => t.Id.Equals(id));
 
             if (kv == null)
             {
                 return NotFound();
             }
+
             _context.TechTalk.Remove(kv);
             _context.SaveChanges();
+
             return new NoContentResult();
         }
     }
