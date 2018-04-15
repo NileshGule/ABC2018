@@ -5,8 +5,8 @@ namespace TechTalksModel
     public class TechTalk
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Category { get; set; }
+        public string TechTalkName { get; set; }
+        public int CategoryId { get; set; }
     }
     
 }

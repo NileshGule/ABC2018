@@ -1,7 +1,9 @@
 ﻿using System;
 using System.IO;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TechTalksModel;
 using TechTalksProcessor.Messaging;
 
 namespace TechTalksProcessor
@@ -38,6 +40,11 @@ namespace TechTalksProcessor
         {
             var services = new ServiceCollection();
             services.AddOptions();
+
+            // services.AddDbContext<TechTalksDBContext>
+            // (
+            //     options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            // );
 
             services.AddSingleton<ITechTalksEventConsumer, TechTalksEventConsumer>();
 

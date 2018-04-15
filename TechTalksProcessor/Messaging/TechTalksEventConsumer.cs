@@ -57,8 +57,8 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine($"Received message {message}");
 
             Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
-            Console.WriteLine($"Tech Talk Name : {techTalk.Name}");
-            Console.WriteLine($"Category : {techTalk.Category}");
+            Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
+            Console.WriteLine($"Category : {techTalk.CategoryId}");
         }
     }    
 }

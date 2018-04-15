@@ -34,7 +34,6 @@ namespace TechTalksAPI.Controllers
         }
 
         [HttpGet("{id}", Name = "GetTechTalkById", Order = 1)]
-        // public IActionResult GetById(int id)
         public TechTalk GetById(int id)
         {
             var item = _context.TechTalk.FirstOrDefault(o => o.Id.Equals(id));
@@ -53,8 +52,8 @@ namespace TechTalksAPI.Controllers
             _context.TechTalk.Add(item);
             _context.SaveChanges();            
             
-            Console.WriteLine("Sending messages");
-            _messageQueue.SendMessage();
+            Console.WriteLine("Sending message to queue");
+            _messageQueue.SendMessage(item);
 
             return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
         }
