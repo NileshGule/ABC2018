@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -73,9 +75,40 @@ namespace TechTalksWeb.Controllers
             else
             {
                 return NotFound();
+            }            
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([FromForm]TechTalkDTO techTalk1)
+        {
+            string url = "http://techtalksapi:8080/api/techtalks/";
+            string output = url;
+
+            Console.WriteLine($"Talk name : {techTalk1.TechTalkName}");
+            Console.WriteLine($"Category ID : {techTalk1.CategoryId}");
+
+            try
+            {
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                Console.WriteLine($"Data is about to be sent to API call");
+                string stringData = JsonConvert.SerializeObject(techTalk1);
+                var contentData = new StringContent(stringData, System.Text.Encoding.UTF8,"application/json");
+                HttpResponseMessage response = client.PostAsync(url, contentData).Result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Inside exceptions block");
+                Console.WriteLine(ex.Message);
             }
 
-            
+            return RedirectToAction("Index");
         }
 
         public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)

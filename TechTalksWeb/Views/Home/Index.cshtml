@@ -2,18 +2,9 @@
 @{
     ViewData["Title"] = "Tech Talks 2018";
 }
-
-<div class="row">
-    <div class="col-md-4">
-        <div class="input-group">
-            <div class="pull-right">
-                <button type="submit" id="searchLocal" class="btn btn-primary" onclick="javascript: localSearchValue();">Search Local</button>
-                <button type="submit" id="searchService" class="btn btn-warning" onclick="javascript: serviceSearchValue();">Search Service</button>
-            </div>
-        </div>
-        
-    </div>
-</div>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
 <div>
     <table class="table table-dark table-striped table-hover">

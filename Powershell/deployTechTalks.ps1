@@ -80,6 +80,12 @@ kubectl apply --recursive --filename .
 
 Write-Host "Tech talks Processor deployed successfully" -ForegroundColor Cyan
 
+Write-Host "Deploying Tech Talks ELK Consumer" -ForegroundColor Yellow
+Set-Location ~/projects/ABC2018/Kubernetes/TechTalksELKProcessor
+kubectl apply --recursive --filename . 
+
+Write-Host "Tech Talks ELK Consumer deployed successfully" -ForegroundColor Cyan
+
 Write-Host "All the services related to Tech Talks application have been successfully deployed" -ForegroundColor Cyan
 
 Set-Location ~/projects/ABC2018/Powershell

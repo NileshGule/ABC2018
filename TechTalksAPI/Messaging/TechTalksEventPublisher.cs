@@ -29,12 +29,6 @@ namespace TechTalksAPI.Messaging
                     Console.WriteLine("Inside model");
                     channel.ExchangeDeclare(exchangeName, "fanout");
                     
-                    // channel.QueueDeclare(queue: queueName,
-                    //                 durable: true,
-                    //                 exclusive: false,
-                    //                 autoDelete: false,
-                    //                 arguments: null);
-
                     string message = "Hello World!";
                     var techTalk = new TechTalk {
                         Id = new Random().Next(100) ,

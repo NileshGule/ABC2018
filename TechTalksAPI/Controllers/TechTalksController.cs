@@ -80,7 +80,7 @@ namespace TechTalksAPI.Controllers
             Console.WriteLine("Sending messages");
             _messageQueue.SendMessage();
 
-            return CreatedAtRoute("GetTechTalkByKey", new { key = item.TechTalkName }, item);
+            return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
             // return new NoContentResult();
         }
 
