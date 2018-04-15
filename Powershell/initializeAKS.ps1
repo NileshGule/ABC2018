@@ -25,7 +25,7 @@ az group create `
 --location=$resourceGroupLocaltion `
 --output=jsonc
 
-# Create resource group name
+# Create AKS cluster
 Write-Host "Creating AKS cluster $clusterName with resource group $resourceGroupName in region $resourceGroupLocaltion" -ForegroundColor Yellow
 time az aks create `
 --resource-group=$resourceGroupName `
