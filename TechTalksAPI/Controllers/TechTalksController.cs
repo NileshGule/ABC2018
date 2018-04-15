@@ -21,28 +21,6 @@ namespace TechTalksAPI.Controllers
             _context = context;
             _messageQueue = messageQueue;
 
-            if (_context.TechTalk.Count() == 0)
-            {
-                _context.TechTalk.Add(
-                    new TechTalk 
-                    {
-                        Id = 1, 
-                        TechTalkName="Docker", 
-                        // Category = new Categories{Id = 1}
-                    }
-                );
-                
-                _context.TechTalk.Add(
-                    new TechTalk 
-                    {
-                        Id = 2, 
-                        TechTalkName="Kubernetes", 
-                        // Category = new Categories{Id = 2}
-                    }
-                );
-                
-                _context.SaveChanges();
-            }
         }
 
         // GET: api/values

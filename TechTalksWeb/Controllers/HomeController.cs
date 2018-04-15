@@ -111,6 +111,32 @@ namespace TechTalksWeb.Controllers
             return RedirectToAction("Index");
         }
 
+        public IActionResult Delete(int id)
+        {
+            string url = "http://techtalksapi:8080/api/techtalks/" + id;
+            string output = url;
+            
+            try
+            {
+                var client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                Console.WriteLine($"Data is about to be deleted using API call");
+                HttpResponseMessage response = client.DeleteAsync(url).Result;
+
+                if(response.IsSuccessStatusCode)
+                {
+                    Console.WriteLine($"Successfully deleted Techalk with Id = {id}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Inside exceptions block");
+                Console.WriteLine(ex.Message);
+            }
+            
+            return RedirectToAction("Index");
+        }
+
         public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)
         {
             // string url = "http://techtalksapi:8080/api/keyvalue";
