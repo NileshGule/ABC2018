@@ -1,27 +1,46 @@
-﻿@{
+﻿@model List<TechTalkDTO>
+@{
     ViewData["Title"] = "Tech Talks 2018";
 }
 
 <div class="row">
     <div class="col-md-4">
-        <h2>Search</h2>
-        <div class="input-group">
-            <span class="input-group-addon">Keyword:</span>
-            <input id="keyword" type="text" class="form-control" name="keyword" placeholder="Enter a keyword">
-        </div>
-        <div class="input-group">
-            <span class="input-group-addon">Service:</span>
-            <input id="svcUrl" type="text" class="form-control" name="svcUrl" placeholder="Enter Service Url">
-        </div>
         <div class="input-group">
             <div class="pull-right">
                 <button type="submit" id="searchLocal" class="btn btn-primary" onclick="javascript: localSearchValue();">Search Local</button>
                 <button type="submit" id="searchService" class="btn btn-warning" onclick="javascript: serviceSearchValue();">Search Service</button>
             </div>
         </div>
-        <div id="LocalSearchResult"></div>
-        <div id="ServiceSearchResult"></div>
+        
     </div>
+</div>
+
+<div>
+    <table class="table table-dark table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      @foreach(TechTalkDTO item in Model)
+      {
+        <tr>
+          <th scope="row">@Html.DisplayFor(model => item.Id)</th>
+          <td>@Html.DisplayFor(model => item.TechTalkName)</td>
+          <td>@Html.DisplayFor(model => item.CategoryId)</td>
+          <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="alert alert-danger" role="alert">Delete</a>
+            </td>
+        </tr>        
+      }
+  </tbody>
+</table>
 </div>
 
 <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
@@ -97,8 +116,6 @@
     function serviceSearchValue() {
         var keyWord = $('#keyword').val();
         var svcUrl = $('#svcUrl').val();
-        <!-- alert('Svc url ' + svcUrl); -->
-        <!-- alert('keyword ' + keyWord); -->
         $('#ServiceSearchResult').load(svcSearchurl, { searchText: keyWord, serviceUrl: svcUrl });
     }
 </script>

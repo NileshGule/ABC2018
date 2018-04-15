@@ -14,7 +14,68 @@ namespace TechTalksWeb.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            string url = "http://techtalksapi:8080/api/techtalks";
+            string output = url;
+
+            List<TechTalkDTO> techTalks = new List<TechTalkDTO>();
+            try
+            {
+                var client = new WebClient();
+                var response = client.DownloadString(url);
+                Console.WriteLine($"Data returned from API call : {response}");
+                techTalks.AddRange(JsonConvert.DeserializeObject<List<TechTalkDTO>>(response));
+
+                Console.WriteLine($"Number of records in collecton : {techTalks.Count()}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Inside exceptions block");
+                Console.WriteLine(ex.Message);
+            }
+
+            var result = new List<TechTalkDTO> 
+            {
+                new TechTalkDTO {Id = 1, TechTalkName="Docker", CategoryId = 1},
+                new TechTalkDTO {Id = 2, TechTalkName="Kubernetes", CategoryId = 2}
+            };
+
+            if(techTalks.Count() == 0)
+            {
+                techTalks.AddRange(result);
+            }
+
+            return View(techTalks);
+        }
+
+        public IActionResult Details(int id)
+        {
+            string url = "http://techtalksapi:8080/api/techtalks/" + id;
+            string output = url;
+
+            TechTalkDTO techTalk = null;
+            try
+            {
+                var client = new WebClient();
+                var response = client.DownloadString(url);
+                Console.WriteLine($"Data returned from API call : {response}");
+                techTalk  = JsonConvert.DeserializeObject<TechTalkDTO>(response);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Inside exceptions block");
+                Console.WriteLine(ex.Message);
+            }
+
+            if(techTalk != null)
+            {
+                return View(techTalk);
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            
         }
 
         public IActionResult DisplayTechTalksResult(string searchText, string serviceUrl)

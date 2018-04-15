@@ -55,10 +55,10 @@ namespace TechTalksAPI.Controllers
             
         }
 
-        [HttpGet("{key}", Name = "GetTechTalkByKey", Order = 1)]
-        public IActionResult GetTechTalkByKey(string key)
+        [HttpGet("{id}", Name = "GetTechTalkById", Order = 1)]
+        public IActionResult GetById(int id)
         {
-            var item = _context.TechTalk.FirstOrDefault(o => o.TechTalkName.Equals(key, StringComparison.InvariantCultureIgnoreCase));
+            var item = _context.TechTalk.FirstOrDefault(o => o.Id.Equals(id));
             if (item == null)
             {
                 return NotFound();
