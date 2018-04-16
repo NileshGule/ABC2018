@@ -69,7 +69,17 @@ namespace TechTalksAPI.Controllers
             }
 
             Console.WriteLine("Sending message to queue");
-            _messageQueue.SendMessage(item);
+
+            TechTalk techTalk = new TechTalk
+            {
+                TechTalkName = item.TechTalkName,
+                CategoryId = item.CategoryId,
+                Category = _context.Categories.FirstOrDefault(x => x.Id == item.CategoryId)
+            };
+
+            _messageQueue.SendMessage(techTalk);
+
+            // _messageQueue.SendMessage(item);
 
             return Ok();
         }

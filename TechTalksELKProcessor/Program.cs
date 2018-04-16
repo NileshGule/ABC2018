@@ -6,6 +6,7 @@ using TechTalksELKProcessor.Indexer;
 using RabbitMQ.Client.Events;
 using System.Text;
 using Newtonsoft.Json;
+using TechTalksModel.DTO;
 
 namespace TechTalksELKProcessor
 {
@@ -21,13 +22,11 @@ namespace TechTalksELKProcessor
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Initializing Elasticsearch. url: {0}", "http://localhost:9200");
+            Console.WriteLine("Initializing Elasticsearch. url: {0}", "http://elk:9200/");
             Index.Setup();
 
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
-            // var factory = new ConnectionFactory() { HostName = "52.224.236.101"};
-            
-
+        
             using (var connection = factory.CreateConnection())
             {
                 Console.WriteLine("Inside connection");
@@ -60,14 +59,22 @@ namespace TechTalksELKProcessor
             Console.WriteLine("Inside ELK receiver...");
             var body = ea.Body;
             var message = Encoding.UTF8.GetString(body);
-            var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
-            techTalk.EventTime = DateTime.UtcNow;
+            var techTalkModel = JsonConvert.DeserializeObject<TechTalksModel.TechTalk>(message);
+
+            TechTalk techTalk = new TechTalk
+            {
+                Id = techTalkModel.Id,
+                TechTalkName = techTalkModel.TechTalkName,
+                Category = techTalkModel.Category.CategoryName,
+                EventTime = DateTime.UtcNow
+            };
+            
 
             Console.WriteLine($"Received message {message}");
 
             Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
             Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
-            Console.WriteLine($"Category : {techTalk.CategoryId}");
+            Console.WriteLine($"Category : {techTalk.Category}");
             
             Index.CreateDocument(techTalk);
             Console.WriteLine("Index written successfully");

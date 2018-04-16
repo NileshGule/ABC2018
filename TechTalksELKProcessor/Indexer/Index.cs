@@ -27,8 +27,6 @@ namespace TechTalksELKProcessor.Indexer
         {
             try
             {
-                // .DefaultIndex(IndexName);
-                            
                 var client = GetElasticClient();
 
                 var result = client.Index(techTalk, idx => idx.Index(IndexName));
@@ -49,7 +47,6 @@ namespace TechTalksELKProcessor.Indexer
 
         private static ElasticClient GetElasticClient()
         {
-            // var node = new Uri("http://52.224.223.130:9200/");
             var node = new Uri("http://elk:9200/");
             
             var settings = new ConnectionSettings(node);

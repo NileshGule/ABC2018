@@ -11,4 +11,8 @@
     <PackageReference Include="RabbitMQ.Client" Version="5.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TechTalksModel\TechTalksModel.csproj" />
+  </ItemGroup>
+
 </Project>

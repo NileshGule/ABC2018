@@ -3,7 +3,7 @@ FROM microsoft/aspnetcore-build AS build-env
 WORKDIR /app
 
 COPY TechTalksELKProcessor /TechTalksELKProcessor/
-# COPY TechTalksModel /TechTalksModel/
+COPY TechTalksModel /TechTalksModel/
 
 # COPY NuGet.config ./
 

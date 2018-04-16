@@ -61,20 +61,12 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine("Inside RabbitMQ receiver...");
             var body = ea.Body;
             var message = Encoding.UTF8.GetString(body);
-            var techTalkDTO = JsonConvert.DeserializeObject<TechTalkDTO>(message);
+            var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
             Console.WriteLine($"Received message {message}");
 
-            Console.WriteLine($"Tech Talk Id : {techTalkDTO.Id}");
-            Console.WriteLine($"Tech Talk Name : {techTalkDTO.TechTalkName}");
-            Console.WriteLine($"Category : {techTalkDTO.CategoryId}");
-
-            TechTalk techTalk = new TechTalk
-            {
-                Id = techTalkDTO.Id,
-                TechTalkName = techTalkDTO.TechTalkName,
-                CategoryId = techTalkDTO.CategoryId,
-                Category = _context.Categories.First(x => x.Id == techTalkDTO.CategoryId)
-            };
+            Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
+            Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
+            Console.WriteLine($"Category : {techTalk.CategoryId}");
 
             _context.TechTalk.Add(techTalk);
             _context.SaveChanges();  
