@@ -17,12 +17,12 @@
     </tr>
   </thead>
   <tbody>
-      @foreach(TechTalkDTO item in Model)
+      @foreach(TechTalksModel.DTO.TechTalkDTO item in Model)
       {
         <tr>
           <th scope="row">@Html.DisplayFor(model => item.Id)</th>
           <td>@Html.DisplayFor(model => item.TechTalkName)</td>
-          <td>@Html.DisplayFor(model => item.CategoryId)</td>
+          <td>@Html.DisplayFor(model => item.CategoryName)</td>
           <td>
                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |

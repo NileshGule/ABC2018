@@ -22,12 +22,11 @@ namespace TechTalksAPI.Controllers
         {
             _context = context;
             _messageQueue = messageQueue;
-
         }
 
         // GET: api/TechTalks
         [HttpGet]
-        public IEnumerable<TechTalk> GetAll()
+        public IEnumerable<TechTalkDTO> GetAll()
         {
             List<TechTalk> techTalks = _context.TechTalk
                 .Include(t => t.Category)
@@ -47,7 +46,8 @@ namespace TechTalksAPI.Controllers
 
             Console.WriteLine(techTalkDTOs);
 
-            return techTalks;
+            // return techTalks;
+            return techTalkDTOs;
             
         }
 
