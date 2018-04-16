@@ -63,7 +63,7 @@ namespace TechTalksAPI.Controllers
             // _context.SaveChanges();
 
             Console.WriteLine("Sending messages");
-            _messageQueue.SendMessage();
+            // _messageQueue.SendMessage();
 
             return CreatedAtRoute("GetByKey", new { key = item.Key }, item);
         }
