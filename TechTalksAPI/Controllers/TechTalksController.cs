@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechTalksAPI.Messaging;
+using TechTalksAPI.Models;
 using TechTalksModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,24 +24,41 @@ namespace TechTalksAPI.Controllers
 
         }
 
-        // GET: api/values
+        // GET: api/TechTalks
         [HttpGet]
         public IEnumerable<TechTalk> GetAll()
         {
-            return _context.TechTalk
-            // .Include(t => t.Category)
-            .ToList();
+            List<TechTalk> techTalks = _context.TechTalk
+                .Include(t => t.Category)
+                .ToList();
+
+            List<TechTalkDTO> techTalkDTOs = new List<TechTalkDTO>();
+            
+            techTalks.ForEach(x => techTalkDTOs.Add(
+                new TechTalkDTO
+                {
+                    Id = x.Id,
+                    TechTalkName = x.TechTalkName,
+                    CategoryId = x.CategoryId,
+                    CategoryName = x.Category.CategoryName
+                }
+            ));
+
+            Console.WriteLine(techTalkDTOs);
+
+            return techTalks;
             
         }
 
         [HttpGet("{id}", Name = "GetTechTalkById", Order = 1)]
+        //GET: api/TechTalks/1
         public TechTalk GetById(int id)
         {
             var item = _context.TechTalk.FirstOrDefault(o => o.Id.Equals(id));
             return item;
         }
 
-        // POST api/values
+        // POST api/TechTalks
         [HttpPost]
         public IActionResult Create([FromBody]TechTalk item)
         {
@@ -52,11 +70,10 @@ namespace TechTalksAPI.Controllers
             Console.WriteLine("Sending message to queue");
             _messageQueue.SendMessage(item);
 
-            // return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
             return Ok();
         }
 
-        // PUT api/values/5
+        // PUT api/TechTalks/5
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody]TechTalk item)
         {
@@ -72,14 +89,13 @@ namespace TechTalksAPI.Controllers
             }
 
             techTalk.TechTalkName = item.TechTalkName;
-            // kv.Category = item.Category;
 
             _context.TechTalk.Update(techTalk);
             _context.SaveChanges();
             return new NoContentResult();
         }
 
-        // DELETE api/values/5
+        // DELETE api/TechTalks/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
