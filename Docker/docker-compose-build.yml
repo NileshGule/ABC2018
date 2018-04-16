@@ -10,8 +10,8 @@ services:
   webmvc:
     image: nileshgule/techtalksweb
     build:
-      context: ../TechTalksWeb
-      dockerfile: Dockerfile
+      context: ..
+      dockerfile: Dockerfile-TechTalksWeb
     depends_on: 
       - techtalks.api
     ports:

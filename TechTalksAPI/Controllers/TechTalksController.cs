@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using TechTalksAPI.Messaging;
 using TechTalksAPI.Models;
 using TechTalksModel;
+using TechTalksModel.DTO;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

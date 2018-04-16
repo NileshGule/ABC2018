@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TechTalksWeb.Models;
+using TechTalksModel.DTO;
 
 namespace TechTalksWeb.Controllers
 {
