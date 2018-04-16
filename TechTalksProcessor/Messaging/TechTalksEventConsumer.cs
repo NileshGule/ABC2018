@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
 using TechTalksModel;
 using System.Threading;
+using TechTalksModel.DTO;
 
 namespace TechTalksProcessor.Messaging
 {
@@ -59,12 +61,20 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine("Inside RabbitMQ receiver...");
             var body = ea.Body;
             var message = Encoding.UTF8.GetString(body);
-            var techTalk = JsonConvert.DeserializeObject<TechTalk>(message);
+            var techTalkDTO = JsonConvert.DeserializeObject<TechTalkDTO>(message);
             Console.WriteLine($"Received message {message}");
 
-            Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
-            Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
-            Console.WriteLine($"Category : {techTalk.CategoryId}");
+            Console.WriteLine($"Tech Talk Id : {techTalkDTO.Id}");
+            Console.WriteLine($"Tech Talk Name : {techTalkDTO.TechTalkName}");
+            Console.WriteLine($"Category : {techTalkDTO.CategoryId}");
+
+            TechTalk techTalk = new TechTalk
+            {
+                Id = techTalkDTO.Id,
+                TechTalkName = techTalkDTO.TechTalkName,
+                CategoryId = techTalkDTO.CategoryId,
+                Category = _context.Categories.First(x => x.Id == techTalkDTO.CategoryId)
+            };
 
             _context.TechTalk.Add(techTalk);
             _context.SaveChanges();  

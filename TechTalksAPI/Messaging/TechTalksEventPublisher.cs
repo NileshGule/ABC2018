@@ -3,7 +3,7 @@ using System.Text;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
 using TechTalksModel;
-// using TechTalksAPI.Models;
+using TechTalksModel.DTO;
 
 namespace TechTalksAPI.Messaging
 {
@@ -13,7 +13,7 @@ namespace TechTalksAPI.Messaging
         private const string queueName = "hello";
         private const string routingKey = "hello";
         
-        public void SendMessage(TechTalk talk)
+        public void SendMessage(TechTalkDTO talk)
         {
             Console.WriteLine("Inside send message");
         
@@ -30,20 +30,20 @@ namespace TechTalksAPI.Messaging
                     Console.WriteLine("Inside model");
                     channel.ExchangeDeclare(exchangeName, "fanout");
                     
-                    TechTalksModel.TechTalk techTalk = new TechTalksModel.TechTalk
-                    {
-                        Id = talk.Id,
-                        TechTalkName = talk.TechTalkName,
-                        CategoryId = talk.CategoryId
-                    };
+                    // TechTalksModel.TechTalk techTalk = new TechTalksModel.TechTalk
+                    // {
+                    //     Id = talk.Id,
+                    //     TechTalkName = talk.TechTalkName,
+                    //     CategoryId = talk.CategoryId
+                    // };
                                         
-                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(techTalk));                    
+                    var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(talk));                    
 
                     channel.BasicPublish(exchange: exchangeName,
                                         routingKey: routingKey,
                                         basicProperties: null,
                                         body: body);
-                    Console.WriteLine(" [x] Sent {0}", techTalk);
+                    Console.WriteLine(" [x] Sent {0}", talk);
                 }
             }
         }

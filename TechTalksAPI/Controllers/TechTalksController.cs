@@ -61,7 +61,7 @@ namespace TechTalksAPI.Controllers
 
         // POST api/TechTalks
         [HttpPost]
-        public IActionResult Create([FromBody]TechTalk item)
+        public IActionResult Create([FromBody]TechTalkDTO item)
         {
             if (item == null)
             {

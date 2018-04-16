@@ -1,9 +1,9 @@
-using TechTalksModel;
+using TechTalksModel.DTO;
 
 namespace TechTalksAPI.Messaging
 {
     public interface ITechTalksEventPublisher
     {
-        void SendMessage(TechTalk talk);
+        void SendMessage(TechTalkDTO talk);
     }
 }
