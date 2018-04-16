@@ -3,7 +3,7 @@ using System.Text;
 using RabbitMQ.Client;
 using Newtonsoft.Json;
 using TechTalksModel;
-using TechTalksAPI.Models;
+// using TechTalksAPI.Models;
 
 namespace TechTalksAPI.Messaging
 {
@@ -13,7 +13,7 @@ namespace TechTalksAPI.Messaging
         private const string queueName = "hello";
         private const string routingKey = "hello";
         
-        public void SendMessage(Models.TechTalk talk)
+        public void SendMessage(TechTalk talk)
         {
             Console.WriteLine("Inside send message");
         

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TechTalksAPI.Messaging;
-using TechTalksAPI.Models;
+using TechTalksModel;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -49,13 +49,11 @@ namespace TechTalksAPI.Controllers
                 return BadRequest();
             }
 
-            _context.TechTalk.Add(item);
-            _context.SaveChanges();            
-            
             Console.WriteLine("Sending message to queue");
             _messageQueue.SendMessage(item);
 
-            return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
+            // return CreatedAtRoute("GetTechTalkById", new { id = item.Id }, item);
+            return Ok();
         }
 
         // PUT api/values/5

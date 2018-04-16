@@ -1,4 +1,4 @@
-using TechTalksAPI.Models;
+using TechTalksModel;
 
 namespace TechTalksAPI.Messaging
 {

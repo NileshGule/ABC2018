@@ -41,10 +41,10 @@ namespace TechTalksProcessor
             var services = new ServiceCollection();
             services.AddOptions();
 
-            // services.AddDbContext<TechTalksDBContext>
-            // (
-            //     options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            // );
+            services.AddDbContext<TechTalksDBContext>
+            (
+                options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
 
             services.AddSingleton<ITechTalksEventConsumer, TechTalksEventConsumer>();
 

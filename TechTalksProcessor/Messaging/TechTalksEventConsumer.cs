@@ -16,6 +16,12 @@ namespace TechTalksProcessor.Messaging
 
         private static ManualResetEvent _ResetEvent = new ManualResetEvent(false);
 
+        private readonly TechTalksDBContext _context;
+        public TechTalksEventConsumer(TechTalksDBContext context)
+        {
+            _context = context;
+        }
+
         public void ConsumeMessage()
         {
             var factory = new ConnectionFactory() { HostName = "rabbitmq"};
@@ -48,7 +54,7 @@ namespace TechTalksProcessor.Messaging
             }
         }
 
-        private static void RabbitMQEventHandler(object model, BasicDeliverEventArgs ea)
+        private void RabbitMQEventHandler(object model, BasicDeliverEventArgs ea)
         {
             Console.WriteLine("Inside RabbitMQ receiver...");
             var body = ea.Body;
@@ -59,6 +65,11 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
             Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
             Console.WriteLine($"Category : {techTalk.CategoryId}");
+
+            _context.TechTalk.Add(techTalk);
+            _context.SaveChanges();  
+
+            Console.WriteLine("TechTalk persisted successfully");
         }
     }    
 }
