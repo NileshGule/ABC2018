@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TechTalksWeb.Models;
 using TechTalksModel.DTO;
+using TechTalksWeb.ViewModels;
 
 namespace TechTalksWeb.Controllers
 {
@@ -81,15 +82,22 @@ namespace TechTalksWeb.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            return View(new TechTalkViewModel{CategoryId = 1});
+            // return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm]TechTalkDTO techTalk1)
+        public IActionResult Create([FromForm]TechTalkViewModel viewModel)
         {
-            Console.WriteLine($"Talk name : {techTalk1.TechTalkName}");
-            Console.WriteLine($"Category ID : {techTalk1.CategoryId}");
+            Console.WriteLine($"Talk name : {viewModel.TechTalkName}");
+            Console.WriteLine($"Category ID : {viewModel.CategoryId}");
+
+            TechTalkDTO dto = new TechTalkDTO
+            {
+                TechTalkName = viewModel.TechTalkName,
+                CategoryId = viewModel.CategoryId
+            };
 
             try
             {
@@ -98,7 +106,7 @@ namespace TechTalksWeb.Controllers
                 
                 Console.WriteLine($"Data is about to be sent to API call");
                 
-                string stringData = JsonConvert.SerializeObject(techTalk1);
+                string stringData = JsonConvert.SerializeObject(viewModel);
                 var contentData = new StringContent(stringData, System.Text.Encoding.UTF8,"application/json");
                 
                 HttpResponseMessage response = client.PostAsync(API_BASE_URL, contentData).Result;
