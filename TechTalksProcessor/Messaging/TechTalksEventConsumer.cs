@@ -68,11 +68,13 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
             Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
             Console.WriteLine($"Category : {techTalk.CategoryId}");
+            Console.WriteLine($"Level : {techTalk.LevelId}");
 
             try
             {
                 _context.TechTalk.Add(techTalk);
                 _context.Entry(techTalk.Category).State = EntityState.Unchanged;
+                _context.Entry(techTalk.Level).State = EntityState.Unchanged;
                 _context.SaveChanges();  
             }
             catch (Exception ex)

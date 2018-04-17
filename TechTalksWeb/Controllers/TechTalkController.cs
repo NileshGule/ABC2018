@@ -82,8 +82,7 @@ namespace TechTalksWeb.Controllers
 
         public IActionResult Create()
         {
-            return View(new TechTalkViewModel{CategoryId = 1});
-            // return View();
+            return View(new TechTalkViewModel{CategoryId = 1, LevelId = 1});
         }
 
         [HttpPost]
@@ -96,7 +95,8 @@ namespace TechTalksWeb.Controllers
             TechTalkDTO dto = new TechTalkDTO
             {
                 TechTalkName = viewModel.TechTalkName,
-                CategoryId = viewModel.CategoryId
+                CategoryId = viewModel.CategoryId,
+                LevelId = viewModel.LevelId
             };
 
             try

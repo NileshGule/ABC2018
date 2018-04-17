@@ -11,7 +11,7 @@ namespace TechTalksELKProcessor.Indexer
         {
             var client = GetElasticClient();
 
-            // client.DeleteIndex(IndexName);
+            client.DeleteIndex(IndexName);
 
             if (!client.IndexExists(IndexName).Exists)
             {

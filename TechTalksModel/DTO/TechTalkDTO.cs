@@ -10,6 +10,8 @@ namespace TechTalksModel.DTO
         public string TechTalkName { get; set; }
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
+        public int LevelId { get; set; }
+        public string LevelName { get; set; }
     }
     
 }

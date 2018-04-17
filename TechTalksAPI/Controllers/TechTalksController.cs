@@ -30,6 +30,7 @@ namespace TechTalksAPI.Controllers
         {
             List<TechTalk> techTalks = _context.TechTalk
                 .Include(t => t.Category)
+                .Include(t => t.Level)
                 .ToList();
 
             List<TechTalkDTO> techTalkDTOs = new List<TechTalkDTO>();
@@ -40,13 +41,12 @@ namespace TechTalksAPI.Controllers
                     Id = x.Id,
                     TechTalkName = x.TechTalkName,
                     CategoryId = x.CategoryId,
-                    CategoryName = x.Category.CategoryName
+                    CategoryName = x.Category.CategoryName,
+                    LevelId = x.LevelId,
+                    LevelName = x.Level.LevelName
                 }
             ));
 
-            Console.WriteLine(techTalkDTOs);
-
-            // return techTalks;
             return techTalkDTOs;
             
         }
@@ -74,7 +74,9 @@ namespace TechTalksAPI.Controllers
             {
                 TechTalkName = item.TechTalkName,
                 CategoryId = item.CategoryId,
-                Category = _context.Categories.FirstOrDefault(x => x.Id == item.CategoryId)
+                Category = _context.Categories.FirstOrDefault(x => x.Id == item.CategoryId),
+                LevelId = item.LevelId,
+                Level = _context.Levels.FirstOrDefault(x => x.Id == item.LevelId)
             };
 
             _messageQueue.SendMessage(techTalk);

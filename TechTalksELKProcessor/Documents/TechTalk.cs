@@ -7,6 +7,8 @@ namespace TechTalksELKProcessor.Documents
         public string TechTalkName { get; set; }
         public string Category { get; set; }
 
+        public string Level { get; set; }
+
         public DateTime EventTime { get; set; }
     }
 }

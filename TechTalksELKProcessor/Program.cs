@@ -65,6 +65,7 @@ namespace TechTalksELKProcessor
             {
                 TechTalkName = techTalkModel.TechTalkName,
                 Category = techTalkModel.Category.CategoryName,
+                Level = techTalkModel.Level.LevelName,
                 EventTime = DateTime.UtcNow
             };
             
