@@ -63,7 +63,6 @@ namespace TechTalksELKProcessor
 
             TechTalk techTalk = new TechTalk
             {
-                Id = techTalkModel.Id,
                 TechTalkName = techTalkModel.TechTalkName,
                 Category = techTalkModel.Category.CategoryName,
                 EventTime = DateTime.UtcNow
@@ -72,7 +71,6 @@ namespace TechTalksELKProcessor
 
             Console.WriteLine($"Received message {message}");
 
-            Console.WriteLine($"Tech Talk Id : {techTalk.Id}");
             Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
             Console.WriteLine($"Category : {techTalk.Category}");
             
