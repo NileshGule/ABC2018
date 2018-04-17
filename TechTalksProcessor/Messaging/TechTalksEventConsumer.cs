@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using TechTalksModel;
 using System.Threading;
 using TechTalksModel.DTO;
+using Microsoft.EntityFrameworkCore;
 
 namespace TechTalksProcessor.Messaging
 {
@@ -68,8 +69,19 @@ namespace TechTalksProcessor.Messaging
             Console.WriteLine($"Tech Talk Name : {techTalk.TechTalkName}");
             Console.WriteLine($"Category : {techTalk.CategoryId}");
 
-            _context.TechTalk.Add(techTalk);
-            _context.SaveChanges();  
+            try
+            {
+                _context.TechTalk.Add(techTalk);
+                _context.Entry(techTalk.Category).State = EntityState.Unchanged;
+                _context.SaveChanges();  
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Inside exception block");
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.InnerException);
+            }
+            
 
             Console.WriteLine("TechTalk persisted successfully");
         }

@@ -78,9 +78,7 @@ namespace TechTalksAPI.Controllers
             };
 
             _messageQueue.SendMessage(techTalk);
-
-            // _messageQueue.SendMessage(item);
-
+            
             return Ok();
         }
 
