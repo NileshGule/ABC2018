@@ -5,11 +5,9 @@ metadata:
   name: rabbitmq
   labels:
     app: rabbitmq
-    type: LoadBalancer  
-    # type: NodePort      
+    type: NodePort      
 spec:
-  # type: NodePort
-  type: LoadBalancer
+  type: NodePort  
   ports:
    - name: http
      protocol: TCP
