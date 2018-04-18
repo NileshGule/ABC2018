@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: techtalksweb
+  namespace: abc2018sg-prod
+  labels:
+    run: webfront
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: webfront
+  
+  template:
+    metadata:
+      labels:
+        run: webfront
+    spec:
+      containers:
+      - name: techtalksweb
+        image: nileshgule/techtalksweb
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webfront
+  namespace: abc2018sg-prod
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+  selector:
+    run: webfront
