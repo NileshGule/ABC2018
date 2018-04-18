@@ -1,0 +1,31 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: rabbitmq-consumer
+  namespace: abc2018sg
+  labels:
+    run: rabbitmq-consumer
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: rabbitmq-consumer
+  
+  template:
+    metadata:
+      labels:
+        run: rabbitmq-consumer
+        app: rabbitmq-consumer
+    spec:
+      containers:
+      - name: rabbitmq-consumer
+        image: nileshgule/techtalksprocessor
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: "Development"
+        imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst

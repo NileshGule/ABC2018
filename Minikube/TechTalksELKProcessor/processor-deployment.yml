@@ -1,0 +1,31 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+
+metadata:
+  name: rabbitmq-elk-processor
+  namespace: abc2018sg
+  labels:
+    run: rabbitmq-elk-processor
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: rabbitmq-elk-processor
+  
+  template:
+    metadata:
+      labels:
+        run: rabbitmq-elk-processor
+        app: rabbitmq-elk-processor
+    spec:
+      containers:
+      - name: rabbitmq-consumer
+        image: nileshgule/techtalkselkprocessor
+        # env:
+        # - name: ASPNETCORE_ENVIRONMENT
+        #   value: "Development"
+        imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
