@@ -17,9 +17,9 @@ spec:
         image: microsoft/mssql-server-linux
         resources:
           requests:
-            memory: "3Gi"
+            memory: "2Gi"
           limits:
-            memory: "4Gi"
+            memory: "3Gi"
         ports:
         - name: dbport
           containerPort: 1433

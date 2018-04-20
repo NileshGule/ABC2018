@@ -214,8 +214,8 @@ OMS Workspace : abc2018sgws
 ```bash
 
 kubectl create secret generic omsagent-secret \
---from-literal=WSID=bec3e616-e25b-4348-ab8f-3cce07f52285 \
---from-literal=KEY=w4B1748UNE0ufAdZK4tgSFfhI0reUWIZXlk/SYMBlP82X+joZJci0mSAbNPKdMMmmCPtUKP8yMh53sYcJki5XQ==
+--from-literal=WSID=9affff97-224c-46b3-b9ac-f4b374aad4ec \
+--from-literal=KEY=0EWOoAeZuxEE7yINOxGL/0sqvLtQ2aA+oLkGHNb5rEAbPyYf/jaHFL11jgL2fMk8I3uUFhjrZRZ9AGcnetlwxg==
 ```
 
 ### List all Kubernetes contexts
@@ -226,11 +226,11 @@ kubectl config get-contexts
 
 ```
 
-### Set Kubernetes context to `minicube`
+### Set Kubernetes context to `minikube`
 
 ```bash
 
-kubectl config use-context minicube
+kubectl config use-context minikube
 
 ```
 

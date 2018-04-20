@@ -15,3 +15,11 @@ minikube start
 minikube service -n abc2018sg --url webfront
 
 ```
+
+## Browse Telk Talks app
+
+```bash
+
+http://192.168.99.100
+
+```
