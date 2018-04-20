@@ -1,18 +1,19 @@
--- IF  NOT EXISTS (SELECT * FROM sys.databases WHERE name = N'TechTalksDB')
---     BEGIN
---         CREATE DATABASE [TechTalksDB]
---     END;
--- GO
-
-IF  EXISTS (SELECT * FROM sys.databases WHERE name = N'TechTalksDB')
+IF  NOT EXISTS (SELECT * FROM sys.databases WHERE name = N'TechTalksDB')
     BEGIN
-        PRINT 'Dropping existing database...'
-        DROP DATABASE [TechTalksDB]
+        PRINT 'Creating database TechTalksDB...'
+        CREATE DATABASE [TechTalksDB]
     END;
 GO
 
-PRINT 'Creating database TechTalksDB...'
-CREATE DATABASE [TechTalksDB]
+-- IF  EXISTS (SELECT * FROM sys.databases WHERE name = N'TechTalksDB')
+--     BEGIN
+--         PRINT 'Dropping existing database...'
+--         DROP DATABASE [TechTalksDB]
+--     END;
+-- GO
+
+-- PRINT 'Creating database TechTalksDB...'
+-- CREATE DATABASE [TechTalksDB]
 
 SELECT Name from sys.Databases
 GO
