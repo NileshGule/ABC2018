@@ -16,10 +16,10 @@ minikube service -n abc2018sg --url webfront
 
 ```
 
-## Browse Telk Talks app
+## Access minikube dashboard
 
 ```bash
 
-http://192.168.99.100
+minikube dashboard
 
 ```
