@@ -5,4 +5,4 @@ The end goal of the demo is to build an application for managing tech talks. The
 
 Initially it starts with a web front end named TechTalksWeb. This interfaces with a backend API named TechTalksAPI. The persistence part is handled using TechTalksDB. 
 
-![v1 application overview](Images/V1 application overview.png)
+![v1 application overview](/Images/V1 application overview.png)
