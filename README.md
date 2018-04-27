@@ -8,4 +8,4 @@ Initially it starts with a web front end named TechTalksWeb. This interacts with
 ![v1 application overview](/Images/V1-application-overview.png)
 
 RabbitMQ provides the messaging capabilities. Elastic Search is used to Index data in denormalized form for reporting and visualization purposes. Kibana provides the UI to build dashboard using Elastic Search Index.
-![Final application overview](/Images/Final-application-overview.png)
+![Final application overview](/Images/Final-Application-Overview.png)
