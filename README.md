@@ -12,9 +12,7 @@ Initially it starts with a web front end named `TechTalksWeb`. This interacts wi
 
 ## Code Structure
 
-***
-
-The code is organized into following structure
+The codebase is organized into following structure
 
 - [Azure](/Azure)
 
