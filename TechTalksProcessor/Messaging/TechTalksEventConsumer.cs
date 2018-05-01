@@ -72,8 +72,8 @@ namespace TechTalksProcessor.Messaging
 
             try
             {
-                Console.WriteLine(_context.Database.GetDbConnection().ConnectionString);
-                
+                // Console.WriteLine(_context.Database.GetDbConnection().ConnectionString);
+
                 _context.TechTalk.Add(techTalk);
                 _context.Entry(techTalk.Category).State = EntityState.Unchanged;
                 _context.Entry(techTalk.Level).State = EntityState.Unchanged;

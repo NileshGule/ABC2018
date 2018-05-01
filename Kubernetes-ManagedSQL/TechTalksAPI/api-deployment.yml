@@ -20,12 +20,13 @@ spec:
     spec:
       containers:
       - name: techtalksapi
-        image: nileshgule/techtalksapi:v1
+        image: nileshgule/techtalksapi
         env:
           - name: ASPNETCORE_URLS
             value: http://0.0.0.0:8080
           - name: ConnectionStrings__DefaultConnection
             value: "Server=tcp:abc2018.database.windows.net,1433;Initial Catalog=TechTalksDB;Persist Security Info=False;User ID=nileshsg2018;Password=January2018;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" 
+            
         ports:
         - containerPort: 8080
           protocol: TCP
