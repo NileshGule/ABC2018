@@ -7,7 +7,7 @@ metadata:
   namespace: abc2018sg-prod
 
 spec:
-  type: NodePort
+  type: LoadBalancer
   ports:
     - protocol: TCP
       port: 8091

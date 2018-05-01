@@ -57,3 +57,5 @@ Contains source code for RabbitMQ consumer which pulls data from RabbitMQ and in
 - [TechTalksWeb](/TechTalksWeb)
 
 Contains source code for web front end of the TechTalks application built using ASP.Net Core MVC framework.
+
+## Installation
