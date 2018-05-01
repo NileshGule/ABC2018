@@ -31,7 +31,9 @@ namespace TechTalksProcessor
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile($"appsettings.{environment}.json", optional: false);
+                .AddJsonFile($"appsettings.{environment}.json", optional: false)
+                .AddEnvironmentVariables(); 
+                //Test the add environemnt variables change with new cluster
 
             Configuration = builder.Build();
         }
