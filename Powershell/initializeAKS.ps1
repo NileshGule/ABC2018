@@ -5,12 +5,15 @@ Param(
     [string]$resourceGroupName="ABC2018ResourceGroup",
     [parameter(Mandatory=$false)]
     [string]$resourceGroupLocaltion="East US",
+    # [string]$resourceGroupLocaltion="Central US",
     [parameter(Mandatory=$false)]
     [string]$clusterName="ABC2018AKSCluster",
     [parameter(Mandatory=$false)]
     [int16]$workerNodeCount=3,
     [parameter(Mandatory=$false)]
-    [string]$kubernetesVersion="1.8.1"
+    # [string]$kubernetesVersion="1.8.1"
+    [string]$kubernetesVersion="1.9.2"
+    
 )
 
 # Set Azure subscription name

@@ -33,8 +33,7 @@ namespace TechTalksProcessor
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile($"appsettings.{environment}.json", optional: false)
                 .AddEnvironmentVariables(); 
-                //Test the add environemnt variables change with new cluster
-
+                
             Configuration = builder.Build();
         }
 
