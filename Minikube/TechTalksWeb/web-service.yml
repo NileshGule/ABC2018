@@ -4,7 +4,8 @@ metadata:
   name: webfront
   namespace: abc2018sg
 spec:
-  type: NodePort
+  # type: NodePort
+  type: LoadBalancer
   ports:
   - port: 80
   selector:

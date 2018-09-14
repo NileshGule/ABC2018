@@ -1,10 +1,11 @@
 Param(
     [parameter(Mandatory=$false)]
-    [string]$subscriptionName="Visual Studio Enterprise",
+    # [string]$subscriptionName="Visual Studio Enterprise",
+    [string]$subscriptionName="Microsoft Azure Sponsorship",
     [parameter(Mandatory=$false)]
     [string]$resourceGroupName="ABC2018ResourceGroup",
     [parameter(Mandatory=$false)]
-    [string]$resourceGroupLocaltion="East US",
+    [string]$resourceGroupLocaltion="South East Asia",
     # [string]$resourceGroupLocaltion="Central US",
     [parameter(Mandatory=$false)]
     [string]$clusterName="ABC2018AKSCluster",
@@ -34,6 +35,7 @@ time az aks create `
 --name=$clusterName `
 --node-count=$workerNodeCount `
 --kubernetes-version=$kubernetesVersion `
+--disable-rbac `
 --output=jsonc
 
 # Get credentials for newly created cluster
