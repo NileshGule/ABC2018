@@ -1,8 +1,8 @@
 ---
 apiVersion: apps/v1beta1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: db-deployment
+  name: sqlserverstatefulset
   namespace: abc2018sg
 spec:
   serviceName: db-deployment
@@ -16,6 +16,7 @@ spec:
       containers:
       - name: sql2017
         image: microsoft/mssql-server-linux
+        imagePullPolicy: IfNotExists
         resources:
           requests:
             memory: "2Gi"
@@ -24,16 +25,6 @@ spec:
         ports:
         - name: dbport
           containerPort: 1433
-        # livenessProbe:
-        #   tcpSocket:
-        #     port: dbport
-        #   initialDelaySeconds: 20
-        #   periodSeconds: 15
-        # readinessProbe:
-        #     tcpSocket:
-        #       port: dbport
-        #     initialDelaySeconds: 20
-        #     periodSeconds: 15
         env:
         - name: ACCEPT_EULA
           value: "Y"
@@ -41,8 +32,8 @@ spec:
           value: January2018
           # valueFrom:
           #   secretKeyRef:
-          #     name: mssql
-          #     key: SA_PASSWORD
+          #     name: sqlsecret
+          #     key: sapassword
         - name: MSSQL_PID
           value: Developer
         volumeMounts:
